@@ -32,6 +32,18 @@ $app->post('/callback', function (Request $request) use ($app) {
     $body = json_decode($request->getContent(), true);
     error_log($request->getContent());
 
+    $args = array(
+        "channelId" => getenv("LINE_CHANNEL_ID"),
+        "channelSecret" => getenv("LINE_CHANNEL_SECRET"),
+        "channelMid" => getenv("LINE_CHANNEL_MID")
+        );
+
+
+    $httpClient = new \LINE\LINEBot\HTTPClient\GuzzleHTTPClient($args);
+    $bot = new \LINE\LINEBot($args,$httpClient);
+    $response = $bot->sendText("U8bc72504db9ad8b02ca8540ef86b8e41","test");
+
+
     foreach ($body['events'] as $msg) {
         error_log(json_encode($msg));
 
