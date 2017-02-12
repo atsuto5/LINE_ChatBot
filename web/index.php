@@ -32,53 +32,71 @@ $app->post('/callback', function (Request $request) use ($app) {
     $body = json_decode($request->getContent(), true);
     error_log($request->getContent());
 
-    $args = array(
-        "channelId" => getenv("LINE_CHANNEL_ID"),
-        "channelSecret" => getenv("LINE_CHANNEL_SECRET"),
-        "channelMid" => getenv("LINE_CHANNEL_MID"),
-        'proxy' => [
-            'https' => getenv("FIXIE_URL"),
-        ]
-        );
+    $accessToken = "xXNBySf4S9RO1vIkD1RfCjKPn1nA+UCc9fybgJXhixe8k4ZOFrP7kTaG7ADNhTaglrHx48RtsZ+s7lSoS8/tTLOVV7bxQO5jQae+ohgmRBaonHf5gUTkmUVRQm8TZKAj8PnOnn6vfwqcmJvGbszWiwdB04t89/1O/w1cDnyilFU=";
+
+    $replyToken = $body["events"][0]["replyToken"];
+    $text = $body["events"][0]["message"]["text"];
+
+    error_log($replyToken);
+    error_log($text);
+
+    $responseText = [
+        "type" => "text",
+        "text" => "てええう"
+    ];
+
+    $postData = [
+        "replyToken" => $replyToken,
+        "messages" => [$responseText]
+    ];
+
+    $ch = curl_init("https://api.line.me/v2/bot/message/reply");
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($postData));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        'Content-Type: application/json; charser=UTF-8',
+        'Authorization: Bearer ' . $accessToken
+    ));
+    $result = curl_exec($ch);
+    curl_close($ch);
 
 
-    $httpClient = new \LINE\LINEBot\HTTPClient\GuzzleHTTPClient($args);
-    $bot = new \LINE\LINEBot($args,$httpClient);
-    $response = $bot->sendText("U8bc72504db9ad8b02ca8540ef86b8e41","test");
-    error_log(json_encode($response));
 
 
-    foreach ($body['events'] as $msg) {
-        error_log(json_encode($msg));
 
-        $resContent = $msg['message'];
-        $resContent['text'] = 'ｶﾞｯ';
-
-        $requestOptions = [
-            'body' => json_encode([
-                'to' => [$msg],
-                'toChannel' => 1383378250, # Fixed value
-                'eventType' => '138311608800106203', # Fixed value
-                'content' => $resContent,
-            ]),
-            'headers' => [
-                'Content-Type' => 'application/json; charset=UTF-8',
-                'X-Line-ChannelID' => getenv("LINE_CHANNEL_ID"),
-                'X-Line-ChannelSecret' => getenv("LINE_CHANNEL_SECRET"),
-                'X-Line-Trusted-User-With-ACL' => getenv("LINE_CHANNEL_MID"),
-            ],
-            'proxy' => [
-                'https' => getenv("FIXIE_URL"),
-            ],
-        ];
-
-        try {
-            $client->post('https://trialbot-api.line.me/v1/events', $requestOptions);
-
-        } catch (Exception $e) {
-            error_log($e->getMessage());
-        }
-    }
+//    foreach ($body['events'] as $msg) {
+//        error_log(json_encode($msg));
+//
+//        $resContent = $msg['message'];
+//        $resContent['text'] = 'ｶﾞｯ';
+//
+//        $requestOptions = [
+//            'body' => json_encode([
+//                'to' => [$msg],
+//                'toChannel' => 1383378250, # Fixed value
+//                'eventType' => '138311608800106203', # Fixed value
+//                'content' => $resContent,
+//            ]),
+//            'headers' => [
+//                'Content-Type' => 'application/json; charset=UTF-8',
+//                'X-Line-ChannelID' => getenv("LINE_CHANNEL_ID"),
+//                'X-Line-ChannelSecret' => getenv("LINE_CHANNEL_SECRET"),
+//                'X-Line-Trusted-User-With-ACL' => getenv("LINE_CHANNEL_MID")
+//            ],
+//            'proxy' => [
+//                'https' => getenv("FIXIE_URL"),
+//            ],
+//        ];
+//
+//        try {
+//            $client->post('https://trialbot-api.line.me/v1/events', $requestOptions);
+//
+//        } catch (Exception $e) {
+//            error_log($e->getMessage());
+//        }
+//    }
 
     return 'OK';
 });
