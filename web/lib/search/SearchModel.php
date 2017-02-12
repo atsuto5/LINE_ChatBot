@@ -25,6 +25,7 @@ class SearchModel {
         $this->setOperation();
         $this->materials = array();
 
+        error_log($this->operation);
         if ($this->operation == "none") {
             return;
         } else if ($this->operation == "search") {
@@ -36,7 +37,6 @@ class SearchModel {
         $tokens = $this->tokenModel->getToken();
         $reverse = array_reverse($tokens);
         foreach ($reverse as $token) {
-
 
             error_log($token);
             //operation Search
