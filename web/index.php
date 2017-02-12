@@ -1,11 +1,11 @@
 <?php
 
 require('../vendor/autoload.php');
-require ('./lib/LineMessageUtil.php');
-require ('./lib/LineClient.php');
-require ('./lib/search/TokenModel.php');
-require ('./lib/search/SearchModel.php');
-require ('./lib/search/MessageModel.php');
+require_once ('./lib/LineMessageUtil.php');
+require_once ('./lib/LineClient.php');
+require_once ('./lib/search/TokenModel.php');
+require_once ('./lib/search/SearchModel.php');
+require_once ('./lib/search/MessageModel.php');
 
 use Symfony\Component\HttpFoundation\Request;
 

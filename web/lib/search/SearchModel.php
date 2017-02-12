@@ -6,7 +6,7 @@
  * Time: 21:43
  */
 
-require ('./lib/search/DicConstant.php');
+require_once ('./lib/search/DicConstant.php');
 
 class SearchModel {
 

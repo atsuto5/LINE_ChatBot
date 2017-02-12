@@ -6,7 +6,7 @@
  * Time: 21:32
  */
 
-require ('./lib/Igo.php');
+require_once ('./lib/Igo.php');
 
 class TokenModel {
 
