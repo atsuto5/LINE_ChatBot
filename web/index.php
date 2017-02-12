@@ -35,13 +35,17 @@ $app->post('/callback', function (Request $request) use ($app) {
     $args = array(
         "channelId" => getenv("LINE_CHANNEL_ID"),
         "channelSecret" => getenv("LINE_CHANNEL_SECRET"),
-        "channelMid" => getenv("LINE_CHANNEL_MID")
+        "channelMid" => getenv("LINE_CHANNEL_MID"),
+        'proxy' => [
+            'https' => getenv("FIXIE_URL"),
+        ]
         );
 
 
     $httpClient = new \LINE\LINEBot\HTTPClient\GuzzleHTTPClient($args);
     $bot = new \LINE\LINEBot($args,$httpClient);
     $response = $bot->sendText("U8bc72504db9ad8b02ca8540ef86b8e41","test");
+    error_log(json_encode($response));
 
 
     foreach ($body['events'] as $msg) {
