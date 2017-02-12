@@ -3,6 +3,7 @@
 require('../vendor/autoload.php');
 require ('./lib/LineMessageUtil.php');
 require ('./lib/search/TokenModel.php');
+require ('./lib/search/SearchModel.php');
 
 use Symfony\Component\HttpFoundation\Request;
 
