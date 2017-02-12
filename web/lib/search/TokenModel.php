@@ -16,7 +16,7 @@ class TokenModel {
 
     public function __construct($text) {
         $this->originText = $text;
-        $this->igo = new Igo("../Igo/ipadic", "UTF-8");
+        $this->igo = new Igo("./lib/Igo/ipadic", "UTF-8");
         $this->token = $this->igo->wakati($text);
     }
 
