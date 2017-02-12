@@ -28,7 +28,7 @@ class TokenModel {
     }
 
     /**
-     * @return 分かち書きされた文字列のリスト
+     * @return array 分かち書きされた文字列のリスト
      */
     public function getToken() {
         return $this->token;
