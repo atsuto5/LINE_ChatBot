@@ -40,30 +40,18 @@ $app->post('/callback', function (Request $request) use ($app) {
     $replyToken = $body["events"][0]["replyToken"];
     $text = $body["events"][0]["message"]["text"];
 
-    error_log("eventType ",$eventType);
+    $tokenModel = new TokenModel($text);
+    $searchModel = new SearchModel($tokenModel);
+    $messageModel = new MessageModel($searchModel);
+
+    error_log("eventType ".$eventType);
+    error_log("replyToken ".$replyToken);
+    error_log("text ".$text);
     if ($eventType == "join") {
-        $lineClient->send($replyToken,[LineMessageUtil::getJoinedMessage()]);
+        $lineClient->send($replyToken,[$messageModel->getMessage()]);
     } else {
-        $tokenModel = new TokenModel($text);
-        $searchModel = new SearchModel($tokenModel);
-
-        error_log($replyToken);
-        error_log($text);
-        error_log(json_encode(LineMessageUtil::getTextMessage("tes")));
-
-        $responseText = LineMessageUtil::getTextMessage("tes");
-
-        $responseImage = LineMessageUtil::getImageMessage("https://shrouded-badlands-61521.herokuapp.com/images/lang-logo.png","https://shrouded-badlands-61521.herokuapp.com/images/lang-logo.png");
-
-        $responseVideo = LineMessageUtil::getVideoMessage("https://www.youtube.com/watch?v=zW279TqmDFE","https://shrouded-badlands-61521.herokuapp.com/images/favicon.png");
-
-        $responseSticker = LineMessageUtil::getStickerMessage("2","522");
-
-
-        $lineClient->send($replyToken,[$responseText]);
+        $lineClient->send($replyToken,[$messageModel->getMessage()]);
     }
-
-
 
     return 'OK';
 });

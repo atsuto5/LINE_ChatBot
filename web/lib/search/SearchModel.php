@@ -73,6 +73,12 @@ class SearchModel {
 
     private function setOperation() {
         $tokens = $this->tokenModel->getToken();
+
+        if (count($tokens) == 0) {
+            $this->operation = "join";
+            return;
+        }
+
         $reverse = array_reverse($tokens);
         foreach ($reverse as $token) {
 
@@ -112,6 +118,31 @@ class SearchModel {
             }
         }
     }
+
+    /**
+     * @return mixed
+     */
+    public function getOperation()
+    {
+        return $this->operation;
+    }
+
+    /**
+     * @return array
+     */
+    public function getMaterials()
+    {
+        return $this->materials;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isReservedMessageKey()
+    {
+        return $this->reservedMessageKey;
+    }
+
 
 
 }

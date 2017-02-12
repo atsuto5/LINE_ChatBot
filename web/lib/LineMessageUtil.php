@@ -66,16 +66,6 @@ class LineMessageUtil {
     }
 
 
-    public static function getJoinedMessage() {
-        $message = <<<EOT
-追加ありがとう！！
-錬金術とキルヘン・ベルのことなら教えられる！
-わからないことがあったら、なんでも聞いてね！
-EOT;
-        return self::getTextMessage($message);
-
-    }
-
 //    public static function getUriActionMessage($linkUri,$imageMapAreaObject) {
 //        return array (
 //            "type" => "uri",
