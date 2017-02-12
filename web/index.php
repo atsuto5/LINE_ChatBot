@@ -42,8 +42,7 @@ $app->post('/callback', function (Request $request) use ($app) {
     $text = "これはテストです";
     $result = $igo->wakati($text);
 
-    print_r($result);
-    error_log(json_encode($result));
+    error_log($result[0]);
 
     error_log($replyToken);
     error_log($text);
