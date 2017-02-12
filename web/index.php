@@ -39,7 +39,7 @@ $app->post('/callback', function (Request $request) use ($app) {
     $replyToken = $body["events"][0]["replyToken"];
     $text = $body["events"][0]["message"]["text"];
 
-    $tokenModel = new TokenModel("これはテストです");
+    $tokenModel = new TokenModel($text);
     $searchModel = new SearchModel($tokenModel);
 
     error_log($replyToken);
