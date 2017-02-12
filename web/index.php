@@ -47,12 +47,12 @@ $app->post('/callback', function (Request $request) use ($app) {
             ]),
             'headers' => [
                 'Content-Type' => 'application/json; charset=UTF-8',
-                'X-Line-ChannelID' => 1499585631,
-                'X-Line-ChannelSecret' => "f27b733e60fc6b4f8459731285adfd89",
-                'X-Line-Trusted-User-With-ACL' => "@dyg2321n",
+                'X-Line-ChannelID' => getenv("LINE_CHANNEL_ID"),
+                'X-Line-ChannelSecret' => getenv("LINE_CHANNEL_SECRET"),
+                'X-Line-Trusted-User-With-ACL' => getenv("LINE_CHANNEL_MID"),
             ],
             'proxy' => [
-                'https' => "http://fixie:hMiDdbvvZHgMotg@velodrome.usefixie.com:80",
+                'https' => getenv("FIXIE_URL"),
             ],
         ];
 
