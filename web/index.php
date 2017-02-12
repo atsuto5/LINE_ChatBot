@@ -49,9 +49,12 @@ $app->post('/callback', function (Request $request) use ($app) {
 
     $responseSticker = LineMessageUtil::getStickerMessage("2","522");
 
+    $responseUri = LineMessageUtil::getUriActionMessage("http://qiita.com/shunwitter/items/162db753db5f12cb2ac3",
+        LineMessageUtil::getImageMapAreaObject(100,100,100,100));
+
     $postData = [
         "replyToken" => $replyToken,
-        "messages" => [$responseText,$responseImage,$responseVideo,$responseSticker]
+        "messages" => [$responseUri]
     ];
 
     $ch = curl_init("https://api.line.me/v2/bot/message/reply");
