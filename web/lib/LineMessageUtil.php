@@ -14,4 +14,12 @@ class LineMessageUtil {
         );
     }
 
+    public static function getImageMessage($originUrl,$previewUrl) {
+        return array(
+            "type" => "image",
+            "originalContentUrl" => $originUrl,
+            "previewImageUrl" => $previewUrl
+        );
+    }
+
 }

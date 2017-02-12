@@ -43,9 +43,11 @@ $app->post('/callback', function (Request $request) use ($app) {
 
     $responseText = LineMessageUtil::getTextMessage("tes");
 
+    $responseImage = LineMessageUtil::getImageMessage("https://shrouded-badlands-61521.herokuapp.com/images/lang-logo.png","https://shrouded-badlands-61521.herokuapp.com/images/lang-logo.png");
+
     $postData = [
         "replyToken" => $replyToken,
-        "messages" => [$responseText]
+        "messages" => [$responseText,$responseImage]
     ];
 
     $ch = curl_init("https://api.line.me/v2/bot/message/reply");
