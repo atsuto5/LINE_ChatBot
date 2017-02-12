@@ -1,9 +1,9 @@
 <?php
 
 require('../vendor/autoload.php');
+require ('./lib/LineMessageUtil.php');
 
 use Symfony\Component\HttpFoundation\Request;
-require ('./lib/LineMessageUtil.php');
 
 date_default_timezone_set("Asia/Tokyo");
 
@@ -40,9 +40,7 @@ $app->post('/callback', function (Request $request) use ($app) {
     error_log($replyToken);
     error_log($text);
 
-
-
-    $responseText = LineMessageUtil::getTextMessage("teeeu");
+    $responseText = LineMessageUtil::getTextMessage("tes");
 
     $postData = [
         "replyToken" => $replyToken,
