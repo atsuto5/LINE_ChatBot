@@ -34,9 +34,6 @@ $app->post('/callback', function (Request $request) use ($app) {
 
     foreach ($body['events'] as $msg) {
         error_log(json_encode($msg));
-        if (!preg_match('/(ぬるぽ|ヌルポ|ﾇﾙﾎﾟ|nullpo)/i', $msg['content']['text'])) {
-            continue;
-        }
 
         $resContent = $msg['message'];
         $resContent['text'] = 'ｶﾞｯ';
