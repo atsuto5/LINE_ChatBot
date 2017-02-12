@@ -46,12 +46,11 @@ class MessageModel {
 
     private function setNoneMessage() {
         $noneMessages = DicConstant::getNoneMessages();
-        srand((float) microtime() * 10000000);
-        $rand_keys = array_rand($noneMessages, 1);
+        shuffle($noneMessages);
 
-        error_log($rand_keys[0]);
+        error_log($noneMessages[0]);
 
-        $this->messageObject = LineMessageUtil::getTextMessage($rand_keys[0]);
+        $this->messageObject = LineMessageUtil::getTextMessage($noneMessages[0]);
     }
 
     private function setJoinedMessage() {
