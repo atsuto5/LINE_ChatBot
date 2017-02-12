@@ -45,7 +45,9 @@ class SearchModel {
         foreach (DicConstant::getReservedWords() as $key => $word) {
             $match = 0;
             foreach ($this->tokenModel->getToken() as $token) {
+                error_log($token."と".$word);
                 if(mb_strpos($word, $token) != false){
+                    error_log("マッチしました");
                     $match++;
                 }
                 if ($match / count($this->tokenModel->getToken()) > $this->reservedLimit) {
