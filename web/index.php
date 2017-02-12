@@ -42,8 +42,7 @@ $app->post('/callback', function (Request $request) use ($app) {
 
     error_log("eventType ",$eventType);
     if ($eventType == "join") {
-        $lineClient->send($replyToken,[LineMessageUtil::getTextMessage("追加ありがとう！！")])
-
+        $lineClient->send($replyToken,[LineMessageUtil::getTextMessage("追加ありがとう！！")]);
     } else {
         $tokenModel = new TokenModel($text);
         $searchModel = new SearchModel($tokenModel);
