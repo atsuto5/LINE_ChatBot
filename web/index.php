@@ -2,6 +2,7 @@
 
 require('../vendor/autoload.php');
 require ('./lib/LineMessageUtil.php');
+require ('./lib/LineClient.php');
 require ('./lib/search/TokenModel.php');
 require ('./lib/search/SearchModel.php');
 
@@ -34,10 +35,15 @@ $app->post('/callback', function (Request $request) use ($app) {
     $body = json_decode($request->getContent(), true);
     error_log($request->getContent());
 
-    $accessToken = getenv("LINE_ACCESS_TOKEN");
 
+
+    $eventType = $body["events"][0]["type"];
     $replyToken = $body["events"][0]["replyToken"];
     $text = $body["events"][0]["message"]["text"];
+
+    if ($eventType == "join") {
+
+    }
 
     $tokenModel = new TokenModel($text);
     $searchModel = new SearchModel($tokenModel);
@@ -54,26 +60,8 @@ $app->post('/callback', function (Request $request) use ($app) {
 
     $responseSticker = LineMessageUtil::getStickerMessage("2","522");
 
-    $postData = [
-        "replyToken" => $replyToken,
-        "messages" => [$responseText]
-    ];
-
-    $ch = curl_init("https://api.line.me/v2/bot/message/reply");
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($postData));
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        'Content-Type: application/json; charser=UTF-8',
-        'Authorization: Bearer ' . $accessToken
-    ));
-    curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, TRUE);
-    curl_setopt($ch, CURLOPT_PROXYPORT, '80');
-    curl_setopt($ch, CURLOPT_PROXY, getenv("FIXIE_URL_ONLY"));
-    $result = curl_exec($ch);
-    error_log(json_encode($result));
-    curl_close($ch);
+    $lineClient = new LineClient();
+    $lineClient->send($replyToken,[$responseText]);
 
     return 'OK';
 });

@@ -52,11 +52,17 @@ class SearchModel {
                 }
             }
 
+            $count = count($this->tokenModel->getToken());
+
             error_log("match ".$match);
             error_log("count ".count($this->tokenModel->getToken()));
-            error_log("結果 ".$match / count($this->tokenModel->getToken()));
+            error_log("結果 ".$count);
 
-            if ($match / count($this->tokenModel->getToken()) > $this->reservedLimit) {
+            if ($count == 0) {
+                continue;
+            }
+
+            if ($match / $count > $this->reservedLimit) {
                 $this->reservedMessageKey = $key;
                 return true;
             }
