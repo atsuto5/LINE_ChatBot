@@ -56,23 +56,40 @@ class LineMessageUtil {
         );
     }
 
-    public static function getUriActionMessage($linkUri,$imageMapAreaObject) {
-        return array (
-            "type" => "uri",
-            "linkUrk" => $linkUri,
-            "area" => $imageMapAreaObject
-        );
+    /**
+     * @param $altText
+     * @param TemplateInterface $template
+     */
+    public static function getTemplateMessage($altText,$template) {
+        $template->getTemplateObject();
 
     }
 
-    public static function getImageMapAreaObject($x,$y,$width,$height) {
-        return array(
-            "x" => $x,
-            "y" => $y,
-            "width" => $width,
-            "height" => $height
-        );
-    }
+//    public static function getUriActionMessage($linkUri,$imageMapAreaObject) {
+//        return array (
+//            "type" => "uri",
+//            "linkUrk" => $linkUri,
+//            "area" => $imageMapAreaObject
+//        );
+//
+//    }
+//
+//    public static function getImageMapAreaObject($x,$y,$width,$height) {
+//        return array(
+//            "x" => $x,
+//            "y" => $y,
+//            "width" => $width,
+//            "height" => $height
+//        );
+//    }
+//
+//    public static function getMessageActionMessage($text,$imageMapAreaObject) {
+//        return array (
+//            "type" => "message",
+//            "text" => $text,
+//            "area" => $imageMapAreaObject
+//        );
+//    }
 
 
 
