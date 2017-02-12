@@ -7,7 +7,6 @@
  */
 
 require ('./lib/search/DicConstant.php');
-require ('./lib/search/TokenModel.php');
 
 class SearchModel {
 
