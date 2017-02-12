@@ -40,7 +40,7 @@ $app->post('/callback', function (Request $request) use ($app) {
 
         $requestOptions = [
             'body' => json_encode([
-                'to' => [$msg['replyToken']],
+                'to' => [$msg],
                 'toChannel' => 1383378250, # Fixed value
                 'eventType' => '138311608800106203', # Fixed value
                 'content' => $resContent,
