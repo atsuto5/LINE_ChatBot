@@ -59,6 +59,9 @@ $app->post('/callback', function (Request $request) use ($app) {
         'Content-Type: application/json; charser=UTF-8',
         'Authorization: Bearer ' . $accessToken
     ));
+    curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, TRUE);
+    curl_setopt($ch, CURLOPT_PROXYPORT, '80');
+    curl_setopt($ch, CURLOPT_PROXY, 'http://fixie:hMiDdbvvZHgMotg@velodrome.usefixie.com');
     $result = curl_exec($ch);
     curl_close($ch);
 
