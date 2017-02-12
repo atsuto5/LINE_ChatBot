@@ -2,6 +2,7 @@
 
 require('../vendor/autoload.php');
 require ('./lib/LineMessageUtil.php');
+require ('./lib/Igo.php');
 
 use Symfony\Component\HttpFoundation\Request;
 
@@ -36,6 +37,12 @@ $app->post('/callback', function (Request $request) use ($app) {
 
     $replyToken = $body["events"][0]["replyToken"];
     $text = $body["events"][0]["message"]["text"];
+
+    $igo = new Igo("./ipadic", "UTF-8");
+    $text = "これはテストです";
+    $result = $igo->wakati($text);
+
+    error_log(json_encode($result));
 
     error_log($replyToken);
     error_log($text);
