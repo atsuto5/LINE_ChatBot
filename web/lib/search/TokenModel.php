@@ -40,8 +40,4 @@ class TokenModel {
     public function getIgo() {
         return $this->igo;
     }
-
-
-
-
 }
