@@ -50,10 +50,15 @@ class SearchModel {
                     error_log("マッチしました");
                     $match++;
                 }
-                if ($match / count($this->tokenModel->getToken()) > $this->reservedLimit) {
-                    $this->reservedMessageKey = $key;
-                    return true;
-                }
+            }
+
+            error_log("match ".$match);
+            error_log("count ".count($this->tokenModel->getToken()));
+            error_log("結果 ".$match / count($this->tokenModel->getToken()));
+
+            if ($match / count($this->tokenModel->getToken()) > $this->reservedLimit) {
+                $this->reservedMessageKey = $key;
+                return true;
             }
         }
         return false;
