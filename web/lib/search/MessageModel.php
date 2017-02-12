@@ -49,6 +49,8 @@ class MessageModel {
         srand((float) microtime() * 10000000);
         $rand_keys = array_rand($noneMessages, 1);
 
+        error_log($rand_keys[0]);
+
         $this->messageObject = LineMessageUtil::getTextMessage($rand_keys[0]);
     }
 
