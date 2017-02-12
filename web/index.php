@@ -3,6 +3,7 @@
 require('../vendor/autoload.php');
 
 use Symfony\Component\HttpFoundation\Request;
+require ('./lib/LineMessageUtil.php');
 
 date_default_timezone_set("Asia/Tokyo");
 
