@@ -5,6 +5,7 @@ require ('./lib/LineMessageUtil.php');
 require ('./lib/LineClient.php');
 require ('./lib/search/TokenModel.php');
 require ('./lib/search/SearchModel.php');
+require ('./lib/search/MessageModel.php');
 
 use Symfony\Component\HttpFoundation\Request;
 
