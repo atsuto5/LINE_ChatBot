@@ -39,10 +39,9 @@ $app->post('/callback', function (Request $request) use ($app) {
     error_log($replyToken);
     error_log($text);
 
-    $responseText = [
-        "type" => "text",
-        "text" => "てええう"
-    ];
+
+
+    $responseText = LineMessageUtil::getTextMessage("teeeu");
 
     $postData = [
         "replyToken" => $replyToken,
