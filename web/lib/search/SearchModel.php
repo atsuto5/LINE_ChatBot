@@ -37,6 +37,8 @@ class SearchModel {
         $reverse = array_reverse($tokens);
         foreach ($reverse as $token) {
 
+
+            error_log($token);
             //operation Search
             foreach (DicConstant::getSearchWords() as $word) {
                 $result = 0;
