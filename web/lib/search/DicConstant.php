@@ -38,4 +38,10 @@ class DicConstant {
         );
     }
 
+    public static function getReservedWords() {
+        return array (
+            "1" => "何がわかる"
+        );
+    }
+
 }

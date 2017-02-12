@@ -7,6 +7,7 @@
  */
 
 require ('./lib/search/DicConstant.php');
+require ('./lib/search/TokenModel.php');
 
 class SearchModel {
 
@@ -16,12 +17,19 @@ class SearchModel {
     private $materials;
     private $searchLimit = 80;
     private $materialLimit = 60;
+    private $reservedLimit = 8.0;
+    private $reservedMessageKey = false;
     /**
      * SearchModel constructor.
      * @param TokenModel $tokenModel
      */
     public function __construct($tokenModel) {
         $this->tokenModel = $tokenModel;
+
+        if ($this->checkReservedWord()) {
+            error_log($this->reservedMessageKey);
+        }
+
         $this->setOperation();
         $this->materials = array();
 
@@ -31,6 +39,24 @@ class SearchModel {
         } else if ($this->operation == "search") {
             $this->setMaterial();
         }
+    }
+
+    private function checkReservedWord() {
+
+        foreach (DicConstant::getReservedWords() as $key => $word) {
+            $match = 0;
+            foreach ($this->tokenModel->getToken() as $token) {
+                if(mb_strpos($word, $token) != false){
+                    $match++;
+                }
+                if ($match / count($this->tokenModel->getToken()) > $this->reservedLimit) {
+                    $this->reservedMessageKey = $key;
+                    return true;
+                }
+            }
+        }
+        return false;
+
     }
 
     private function setOperation() {
@@ -69,8 +95,7 @@ class SearchModel {
                 error_log($token."と".$word."の類似度は".$result);
 
                 if ($result > $this->materialLimit) {
-                    $this->operation = "search";
-                    return;
+                    $this->materials[] = $token;
                 }
             }
         }
