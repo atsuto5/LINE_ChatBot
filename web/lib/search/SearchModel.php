@@ -46,7 +46,7 @@ class SearchModel {
             $match = 0;
             foreach ($this->tokenModel->getToken() as $token) {
                 error_log($token."と".$word);
-                if(mb_strpos($word, $token) != false){
+                if(mb_strpos($word, $token,0, "UTF-8") != false){
                     error_log("マッチしました");
                     $match++;
                 }
