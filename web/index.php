@@ -2,6 +2,8 @@
 
 require('../vendor/autoload.php');
 
+date_default_timezone_set("Asia/Tokyo");
+
 $app = new Silex\Application();
 $app['debug'] = true;
 
