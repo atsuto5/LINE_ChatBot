@@ -30,7 +30,7 @@ $app->post('/callback', function (Request $request) use ($app) {
     $client = new GuzzleHttp\Client();
 
     $body = json_decode($request->getContent(), true);
-    error_log($body);
+    error_log($request->getContent());
 
     foreach ($body['result'] as $msg) {
         if (!preg_match('/(ぬるぽ|ヌルポ|ﾇﾙﾎﾟ|nullpo)/i', $msg['content']['text'])) {
