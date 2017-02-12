@@ -45,9 +45,13 @@ $app->post('/callback', function (Request $request) use ($app) {
 
     $responseImage = LineMessageUtil::getImageMessage("https://shrouded-badlands-61521.herokuapp.com/images/lang-logo.png","https://shrouded-badlands-61521.herokuapp.com/images/lang-logo.png");
 
+    $responseVideo = LineMessageUtil::getVideoMessage("https://www.youtube.com/watch?v=zW279TqmDFE","https://shrouded-badlands-61521.herokuapp.com/images/favicon.png");
+
+    $responseSticker = LineMessageUtil::getStickerMessage("2","522");
+
     $postData = [
         "replyToken" => $replyToken,
-        "messages" => [$responseText,$responseImage]
+        "messages" => [$responseText,$responseImage,$responseVideo,$responseSticker]
     ];
 
     $ch = curl_init("https://api.line.me/v2/bot/message/reply");

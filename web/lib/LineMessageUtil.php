@@ -22,4 +22,62 @@ class LineMessageUtil {
         );
     }
 
+    public static function getVideoMessage($originUrl,$previewUrl) {
+        return array(
+            "type" => "video",
+            "originalContentUrl" => $originUrl,
+            "previewImageUrl" => $previewUrl
+        );
+    }
+
+    public static function getAudioMessage($originUrl,$duration) {
+        return array(
+            "type" => "audio",
+            "originalContentUrl" => $originUrl,
+            "duration" => $duration
+        );
+    }
+
+    public static function getLocationMessage($title,$address,$latitude,$longitude) {
+        return array(
+            "type" => "location",
+            "title" => $title,
+            "address" => $address,
+            "latitude" => $latitude,
+            "longitude" => $longitude
+        );
+    }
+
+    public static function getStickerMessage($packageId, $stickerId) {
+        return array(
+            "type" => "sticker",
+            "packageId" => $packageId,
+            "stickerId" => $stickerId
+        );
+    }
+
+    public static function getUriActionMessage($linkUri,$imageMapAreaObject) {
+        return array (
+            "type" => "uri",
+            "linkUrk" => $linkUri,
+            "area" => $imageMapAreaObject
+        );
+
+    }
+
+    public static function getImageMapAreaObject($x,$y,$width,$height) {
+        return array(
+            "x" => $x,
+            "y" => $y,
+            "width" => $width,
+            "height" => $height
+        );
+    }
+
+
+
+
+
+
+
 }
