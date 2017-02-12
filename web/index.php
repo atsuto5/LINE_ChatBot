@@ -32,20 +32,18 @@ $app->post('/callback', function (Request $request) use ($app) {
     $body = json_decode($request->getContent(), true);
     error_log($request->getContent());
 
-
-
-    foreach ($body['result'] as $msg) {
+    foreach ($body['events'] as $msg) {
         error_log(json_encode($msg));
         if (!preg_match('/(ぬるぽ|ヌルポ|ﾇﾙﾎﾟ|nullpo)/i', $msg['content']['text'])) {
             continue;
         }
 
-        $resContent = $msg['content'];
+        $resContent = $msg['message'];
         $resContent['text'] = 'ｶﾞｯ';
 
         $requestOptions = [
             'body' => json_encode([
-                'to' => [$msg['content']['from']],
+                'to' => [$msg['replyToken']],
                 'toChannel' => 1383378250, # Fixed value
                 'eventType' => '138311608800106203', # Fixed value
                 'content' => $resContent,
