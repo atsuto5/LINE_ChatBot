@@ -39,6 +39,7 @@ $app->post('/callback', function (Request $request) use ($app) {
 
     error_log($replyToken);
     error_log($text);
+    error_log(LineMessageUtil::getTextMessage("tes"));
 
     $responseText = LineMessageUtil::getTextMessage("tes");
 
