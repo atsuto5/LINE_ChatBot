@@ -50,10 +50,9 @@ class SearchModel {
                     return;
                 }
             }
-
-            $this->operation = "none";
-            return;
         }
+        $this->operation = "none";
+        return;
     }
 
     private function setMaterial() {
