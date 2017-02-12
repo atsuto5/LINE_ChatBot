@@ -8,10 +8,10 @@
 class LineMessageUtil {
 
     public static function getTextMessage($message) {
-        return array(
+        return array(array(
             "type" => "text",
             "message" => $message
-        );
+        ));
     }
 
 }
