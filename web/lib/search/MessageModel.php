@@ -5,7 +5,8 @@
  * Date: 2017/02/12
  * Time: 22:27
  */
-require ('./lib/search/DicConstant.php');
+require_once ('./lib/LineMessageUtil.php');
+require_once ('./lib/search/DicConstant.php');
 
 class MessageModel {
 
