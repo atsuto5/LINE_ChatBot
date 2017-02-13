@@ -40,7 +40,8 @@ class DicConstant {
 
     public static function getReservedWords() {
         return array (
-            "1" => "何がわかる"
+            "1" => "何,わかる,できる",
+			"2" => "ヘルプ"
         );
     }
 

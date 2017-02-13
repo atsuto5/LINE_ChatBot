@@ -41,4 +41,30 @@ class TokenModel {
     public function getIgo() {
         return $this->igo;
     }
+
+	/**
+	 * 動詞を返す
+	 */
+    public function getVerbs() {
+
+		$result = array();
+
+		foreach ($this->getToken() as $token) {
+			if (mb_strpos($token->feature,"動詞", 0, "UTF-8") != false) {
+				$result[] = $token;
+			}
+		}
+		return $result;
+	}
+
+	public function getNouns() {
+		$result = array();
+
+		foreach ($this->getToken() as $token) {
+			if (mb_strpos($token->feature,"名詞", 0, "UTF-8") != false) {
+				$result[] = $token;
+			}
+		}
+		return $result;
+	}
 }

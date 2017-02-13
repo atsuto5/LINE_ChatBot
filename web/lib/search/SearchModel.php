@@ -42,6 +42,12 @@ class SearchModel {
 
     private function checkReservedWord() {
 
+		$verbs = $this->tokenModel->getVerbs();
+		$nouns = $this->tokenModel->getNouns();
+
+		error_log(print_r($verbs,true));
+		error_log(print_r($nouns,true));
+
         foreach (DicConstant::getReservedWords() as $key => $word) {
             $match = 0;
             foreach ($this->tokenModel->getToken() as $token) {
