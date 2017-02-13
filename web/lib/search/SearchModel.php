@@ -57,6 +57,8 @@ class SearchModel {
 			}
 
 			foreach ($verbs as $verb) {
+				error_log($verb->surface);
+				error_log($words["verb"]);
 				if(mb_strpos($verb->surface, $words["verb"],0, "UTF-8") !== false){
 					error_log($verb->surface."と".$words["verb"]."が一致した");
 					$checkVerb = true;
