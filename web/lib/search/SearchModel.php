@@ -68,15 +68,17 @@ class SearchModel {
 			//名詞のみの場合
 			if ($words["verb"] == "") {
 				if ($checkNoun) {
-					return $key;
+					$this->reservedMessageKey = $key;
+					return true;
 				}
 			} else {
 				if ($checkNoun && $checkVerb) {
-					return $key;
+					$this->reservedMessageKey = $key;
+					return true;
 				}
 			}
 		}
-		return "0";
+		return false;
     }
 
     private function setOperation() {
