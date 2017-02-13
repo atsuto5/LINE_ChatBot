@@ -50,7 +50,7 @@ class SearchModel {
 			$checkNoun = false;
 			$checkVerb = false;
 			foreach ($nouns as $noun) {
-				if(mb_strpos($noun->surface, $words["noun"],0, "UTF-8") !== false){
+				if(mb_strpos($words["noun"], $noun->surface,0, "UTF-8") !== false){
 					error_log($noun->surface."と".$words["noun"]."が一致した");
 					$checkNoun = true;
 				}
@@ -59,7 +59,7 @@ class SearchModel {
 			foreach ($verbs as $verb) {
 				error_log($verb->surface);
 				error_log($words["verb"]);
-				if(mb_strpos($verb->surface, $words["verb"],0, "UTF-8") !== false){
+				if(mb_strpos($words["verb"], $verb->surface ,0, "UTF-8") !== false){
 					error_log($verb->surface."と".$words["verb"]."が一致した");
 					$checkVerb = true;
 				}
