@@ -27,7 +27,9 @@ class MessageModel {
             $this->setSingleMaterialMessage();
         } else if ($operation == "join") {
             $this->setJoinedMessage();
-        } else {
+        } else if ($operation == "reserve"){
+			$this->setReservedMessage();
+		} else {
             $this->setNoneMessage();
         }
     }
@@ -52,6 +54,19 @@ class MessageModel {
 
         $this->messageObject = LineMessageUtil::getTextMessage($noneMessages[0]);
     }
+
+    private function setReservedMessage() {
+		if ($this->searchModel->getReservedMessageKey() == "1" ||
+			$this->searchModel->getReservedMessageKey() == "2"
+		) {
+			$message = <<<EOT
+ヘルプだよ！！
+EOT;
+			$this->messageObject = LineMessageUtil::getTextMessage($message);
+
+		}
+
+	}
 
     private function setJoinedMessage() {
         $message = <<<EOT

@@ -69,11 +69,13 @@ class SearchModel {
 			if ($words["verb"] == "") {
 				if ($checkNoun) {
 					$this->reservedMessageKey = $key;
+					$this->operation = "reserve";
 					return true;
 				}
 			} else {
 				if ($checkNoun && $checkVerb) {
 					$this->reservedMessageKey = $key;
+					$this->operation = "reserve";
 					return true;
 				}
 			}
@@ -145,10 +147,10 @@ class SearchModel {
         return $this->materials;
     }
 
-    /**
-     * @return bool
-     */
-    public function isReservedMessageKey()
+	/**
+	 * @return string
+	 */
+    public function getReservedMessageKey()
     {
         return $this->reservedMessageKey;
     }
