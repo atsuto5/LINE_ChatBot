@@ -18,7 +18,7 @@ class TokenModel {
         $this->originText = $text;
         $this->igo = new Igo("./lib/Igo/ipadic", "UTF-8");
         $this->token = $this->igo->parse($text);
-		error_log(json_encode($this->token));
+		error_log(print_r($this->token,true));
     }
 
     /**
