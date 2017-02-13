@@ -51,12 +51,14 @@ class SearchModel {
 			$checkVerb = false;
 			foreach ($nouns as $noun) {
 				if(mb_strpos($noun->surface, $words["noun"],0, "UTF-8") !== false){
+					error_log($noun->surface."と".$words["noun"]."が一致した");
 					$checkNoun = true;
 				}
 			}
 
 			foreach ($verbs as $verb) {
 				if(mb_strpos($verb->surface, $words["verb"],0, "UTF-8") !== false){
+					error_log($verb->surface."と".$words["verb"]."が一致した");
 					$checkVerb = true;
 				}
 			}
