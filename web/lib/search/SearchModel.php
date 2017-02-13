@@ -27,6 +27,7 @@ class SearchModel {
 
         if ($this->checkReservedWord()) {
             error_log($this->reservedMessageKey);
+			return;
         }
 
         $this->setOperation();
@@ -94,12 +95,12 @@ class SearchModel {
         $reverse = array_reverse($tokens);
         foreach ($reverse as $token) {
 
-            error_log($token);
+            error_log(print_r($token,true));
             //operation Search
             foreach (DicConstant::getSearchWords() as $word) {
                 $result = 0;
-                similar_text($token,$word,$result);
-                error_log($token."と".$word."の類似度は".$result);
+                similar_text($token->surface,$word,$result);
+                error_log($token->surface."と".$word."の類似度は".$result);
 
                 if ($result > $this->searchLimit) {
                     $this->operation = "search";
@@ -114,18 +115,18 @@ class SearchModel {
     private function setMaterial() {
         foreach ($this->tokenModel->getToken() as $token) {
 
-            if (strlen($token) <= 1) {
+            if (strlen($token->surface) <= 1) {
                 continue;
             }
 
             //Material Search
             foreach (DicConstant::getMaterialWords() as $word) {
                 $result = 0;
-                similar_text($token,$word,$result);
-                error_log($token."と".$word."の類似度は".$result);
+                similar_text($token->surface,$word,$result);
+                error_log($token->surface."と".$word."の類似度は".$result);
 
                 if ($result > $this->materialLimit) {
-                    $this->materials[] = $token;
+                    $this->materials[] = $token->surface;
                 }
             }
         }
