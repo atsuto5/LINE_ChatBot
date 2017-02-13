@@ -72,6 +72,7 @@ class SearchModel {
 				}
 			}
 		}
+		return "0";
     }
 
     private function setOperation() {
