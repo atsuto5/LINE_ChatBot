@@ -17,7 +17,8 @@ class TokenModel {
     public function __construct($text) {
         $this->originText = $text;
         $this->igo = new Igo("./lib/Igo/ipadic", "UTF-8");
-        $this->token = $this->igo->wakati($text);
+        $this->token = $this->igo->parse($text);
+		error_log(json_encode($this->token));
     }
 
     /**
@@ -28,7 +29,7 @@ class TokenModel {
     }
 
     /**
-     * @return array 分かち書きされた文字列のリスト
+     * @return array 解析結果の形態素リスト
      */
     public function getToken() {
         return $this->token;
