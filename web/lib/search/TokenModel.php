@@ -51,7 +51,7 @@ class TokenModel {
 
 		foreach ($this->getToken() as $token) {
 			error_log(print_r($token->feature,true));
-			if (stripos($token->feature,"動詞") != false) {
+			if (mb_strpos("動詞", $token->feature, 0, "UTF-8") != false) {
 				$result[] = $token;
 			}
 		}
@@ -62,7 +62,7 @@ class TokenModel {
 		$result = array();
 
 		foreach ($this->getToken() as $token) {
-			if (mb_strpos($token->feature,"名詞", 0, "UTF-8") != false) {
+			if (mb_strpos("名詞", $token->feature, 0, "UTF-8") != false) {
 				$result[] = $token;
 			}
 		}
