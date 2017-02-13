@@ -24,6 +24,13 @@ class MessageModel {
         if ($operation == "none") {
             $this->setNoneMessage();
         } else if ($operation == "search") {
+			$materials = $this->searchModel->getMaterials();
+			if (count($materials) == 1) {
+				$this->setSingleMaterialMessage();
+			} else {
+				$this->setMultiMaterialMessage();
+			}
+
             $this->setSingleMaterialMessage();
         } else if ($operation == "join") {
             $this->setJoinedMessage();
@@ -39,11 +46,18 @@ class MessageModel {
     }
 
     private function setSingleMaterialMessage() {
-        $this->messageObject = LineMessageUtil::getTextMessage("検索する予定です");
+        $this->messageObject = LineMessageUtil::getTextMessage($this->searchModel->getMaterials()[0]."を探してくるよ！！");
     }
 
     private function setMultiMaterialMessage() {
-        $this->messageObject = LineMessageUtil::getTextMessage("検索する予定です");
+
+		$message = "もしかして・・・\n";
+		foreach ($this->searchModel->getMaterials() as $material) {
+			$message .= $material;
+		}
+		$message .= "のこと？";
+
+        $this->messageObject = LineMessageUtil::getTextMessage($message);
     }
 
     private function setNoneMessage() {
