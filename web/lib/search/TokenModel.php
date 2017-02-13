@@ -49,6 +49,7 @@ class TokenModel {
 
 		$result = array();
 
+		error_log(mb_internal_encoding());
 		foreach ($this->getToken() as $token) {
 			error_log(print_r($token->feature,true));
 			if (mb_strpos($token->feature,"動詞", 0, "UTF-8") !== false) {
