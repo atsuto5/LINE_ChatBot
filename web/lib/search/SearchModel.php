@@ -45,36 +45,33 @@ class SearchModel {
 		$verbs = $this->tokenModel->getVerbs();
 		$nouns = $this->tokenModel->getNouns();
 
-		error_log(print_r($verbs,true));
-		error_log(print_r($nouns,true));
+		foreach (DicConstant::getReservedWords() as $key => $words) {
 
-        foreach (DicConstant::getReservedWords() as $key => $word) {
-            $match = 0;
-            foreach ($this->tokenModel->getToken() as $token) {
-                error_log($token."と".$word);
-                if(mb_strpos($word, $token,0, "UTF-8") != false){
-                    error_log("マッチしました");
-                    $match++;
-                }
-            }
+			$checkNoun = false;
+			$checkVerb = false;
+			foreach ($nouns as $noun) {
+				if(mb_strpos($noun->surface, $words["noun"],0, "UTF-8") !== false){
+					$checkNoun = true;
+				}
+			}
 
-            $count = count($this->tokenModel->getToken());
+			foreach ($verbs as $verb) {
+				if(mb_strpos($verb->surface, $words["verb"],0, "UTF-8") !== false){
+					$checkVerb = true;
+				}
+			}
 
-            error_log("match ".$match);
-            error_log("count ".count($this->tokenModel->getToken()));
-            error_log("結果 ".$count);
-
-            if ($count == 0) {
-                continue;
-            }
-
-            if ($match / $count > $this->reservedLimit) {
-                $this->reservedMessageKey = $key;
-                return true;
-            }
-        }
-        return false;
-
+			//名詞のみの場合
+			if ($words["verb"] == "") {
+				if ($checkNoun) {
+					return $key;
+				}
+			} else {
+				if ($checkNoun && $checkVerb) {
+					return $key;
+				}
+			}
+		}
     }
 
     private function setOperation() {
