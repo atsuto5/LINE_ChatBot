@@ -49,9 +49,9 @@ $app->post('/callback', function (Request $request) use ($app) {
     error_log("replyToken ".$replyToken);
     error_log("text ".$text);
     if ($eventType == "join") {
-        $lineClient->send($replyToken,[$messageModel->getMessage()]);
+        $lineClient->send($replyToken,$messageModel->getMessage());
     } else {
-        $lineClient->send($replyToken,[$messageModel->getMessage()]);
+        $lineClient->send($replyToken,$messageModel->getMessage());
     }
 
     return 'OK';

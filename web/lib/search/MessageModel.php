@@ -11,7 +11,7 @@ require_once ('./lib/search/DicConstant.php');
 class MessageModel {
 
     private $searchModel;
-    private $messageObject;
+    private $messageArray;
 	private $materialDetail;
 
     /**
@@ -21,6 +21,7 @@ class MessageModel {
     public function __construct($searchModel) {
         $this->searchModel = $searchModel;
 		$this->materialDetail = json_decode(file_get_contents("./data/material.json"));
+		$this->messageArray = array();
         $operation = $this->searchModel->getOperation();
 
         if ($operation == "none") {
@@ -44,11 +45,19 @@ class MessageModel {
     }
 
     public function getMessage() {
-        return $this->messageObject;
+        return $this->messageArray;
     }
 
     private function setSingleMaterialMessage() {
-        $this->messageObject = LineMessageUtil::getTextMessage($this->searchModel->getMaterials()[0]."を探してくるよ！！");
+		$targetMaterial = $this->searchModel->getMaterials()[0];
+        $this->messageArray[] = LineMessageUtil::getTextMessage($targetMaterial."を探してくるよ！！");
+
+		$result = $this->materialDetail[$targetMaterial];
+		if ($result) {
+			$this->messageArray[] = LineMessageUtil::getTextMessage("あった！！");
+		} else {
+			$this->messageArray[] = LineMessageUtil::getTextMessage("ごめん。わからなかった...");
+		}
 
 		error_log(print_r($this->materialDetail,true));
     }
@@ -61,7 +70,7 @@ class MessageModel {
 		}
 		$message .= "のこと？";
 
-        $this->messageObject = LineMessageUtil::getTextMessage($message);
+		$this->messageArray[] = LineMessageUtil::getTextMessage($message);
     }
 
     private function setNoneMessage() {
@@ -70,7 +79,7 @@ class MessageModel {
 
         error_log($noneMessages[0]);
 
-        $this->messageObject = LineMessageUtil::getTextMessage($noneMessages[0]);
+		$this->messageArray[] = LineMessageUtil::getTextMessage($noneMessages[0]);
     }
 
     private function setReservedMessage() {
@@ -80,7 +89,7 @@ class MessageModel {
 			$message = <<<EOT
 ヘルプだよ！！
 EOT;
-			$this->messageObject = LineMessageUtil::getTextMessage($message);
+			$this->messageArray[] = LineMessageUtil::getTextMessage($message);
 
 		}
 
@@ -92,7 +101,7 @@ EOT;
 錬金術とキルヘン・ベルのことなら教えられるよ！
 わからないことがあったら、なんでも聞いてね！
 EOT;
-         $this->messageObject = LineMessageUtil::getTextMessage($message);
+		$this->messageArray[] = LineMessageUtil::getTextMessage($message);
     }
 
 
