@@ -28,7 +28,9 @@ class MessageModel {
             $this->setNoneMessage();
         } else if ($operation == "search") {
 			$materials = $this->searchModel->getMaterials();
-			if (count($materials) == 1) {
+			if (count($materials) == 0) {
+				$this->setNoneMessage();
+			} else if (count($materials) == 1) {
 				$this->setSingleMaterialMessage();
 			} else {
 				$this->setMultiMaterialMessage();
