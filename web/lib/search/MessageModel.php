@@ -55,6 +55,8 @@ class MessageModel {
 		error_log(print_r($this->materialDetail,true));
 
 		$result = $this->materialDetail[$targetMaterial];
+		error_log(print_r($result,true));
+
 		if ($result) {
 			$this->messageArray[] = LineMessageUtil::getImageMessage($result[""]);
 		} else {
