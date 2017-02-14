@@ -72,14 +72,25 @@ class TokenModel {
 		return $result;
 	}
 
-	public function getNounsText() {
-		$nouns = $this->getNouns();
+	public function getInVerbsText() {
+		$nouns = $this->getInVerbs();
 		$result = "";
 
 		foreach ($nouns as $noun) {
 			$result .= $noun->surface;
 		}
 
+		return $result;
+	}
+
+	private function getInVerbs() {
+		$result = array();
+
+		foreach ($this->getToken() as $token) {
+			if (mb_strpos($token->feature,"動詞", 0, "UTF-8") === false) {
+				$result[] = $token;
+			}
+		}
 		return $result;
 	}
 }

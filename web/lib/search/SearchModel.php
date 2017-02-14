@@ -115,7 +115,7 @@ class SearchModel {
     private function setMaterial() {
 		foreach (DicConstant::getMaterialWords() as $word) {
 			$result = 0;
-			$nounsText = $this->tokenModel->getNounsText();
+			$nounsText = $this->tokenModel->getInVerbsText();
 			similar_text($nounsText,$word,$result);
 
 			error_log($nounsText."と".$word."の類似度は".$result);
