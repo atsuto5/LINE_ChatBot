@@ -20,7 +20,7 @@ class MessageModel {
      */
     public function __construct($searchModel) {
         $this->searchModel = $searchModel;
-		$this->materialDetail = json_decode(file_get_contents("./data/material.json"));
+		$this->materialDetail = json_decode(file_get_contents("./data/material.json"),true);
 		$this->messageArray = array();
         $operation = $this->searchModel->getOperation();
 
@@ -56,7 +56,7 @@ class MessageModel {
 
 		$result = $this->materialDetail[$targetMaterial];
 		if ($result) {
-			$this->messageArray[] = LineMessageUtil::getTextMessage("あった！！");
+			$this->messageArray[] = LineMessageUtil::getImageMessage($result[""]);
 		} else {
 			$this->messageArray[] = LineMessageUtil::getTextMessage("ごめん。わからなかった...");
 		}
