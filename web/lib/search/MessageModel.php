@@ -58,7 +58,7 @@ class MessageModel {
 		error_log(print_r($result,true));
 
 		if ($result) {
-			$this->messageArray[] = LineMessageUtil::getImageMessage($result[""]);
+			$this->messageArray[] = LineMessageUtil::getImageMessage($result["image_url"],$result["image_url"]);
 		} else {
 			$this->messageArray[] = LineMessageUtil::getTextMessage("ごめん。わからなかった...");
 		}
