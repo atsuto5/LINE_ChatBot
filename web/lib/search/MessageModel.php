@@ -52,6 +52,8 @@ class MessageModel {
 		$targetMaterial = $this->searchModel->getMaterials()[0];
         $this->messageArray[] = LineMessageUtil::getTextMessage($targetMaterial."を探してくるよ！！");
 
+		error_log(print_r($this->materialDetail,true));
+
 		$result = $this->materialDetail[$targetMaterial];
 		if ($result) {
 			$this->messageArray[] = LineMessageUtil::getTextMessage("あった！！");
@@ -76,9 +78,6 @@ class MessageModel {
     private function setNoneMessage() {
         $noneMessages = DicConstant::getNoneMessages();
         shuffle($noneMessages);
-
-        error_log($noneMessages[0]);
-
 		$this->messageArray[] = LineMessageUtil::getTextMessage($noneMessages[0]);
     }
 
