@@ -20,7 +20,7 @@ class MessageModel {
      */
     public function __construct($searchModel) {
         $this->searchModel = $searchModel;
-		$this->materialDetail = json_decode("./data/material.json");
+		$this->materialDetail = json_decode(file_get_contents("./data/material.json"));
         $operation = $this->searchModel->getOperation();
 
         if ($operation == "none") {
