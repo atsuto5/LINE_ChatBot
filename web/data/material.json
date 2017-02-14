@@ -1,0 +1,12 @@
+{
+  "魔法の草": {
+    "level" : "2",
+    "color" : "緑",
+    "price" : "2",
+    "category" : "（植物類）10,（薬の材料）10",
+    "image_url": "https://shrouded-badlands-61521.herokuapp.com/images/magic_leaf.png",
+    "place" : "巡礼街道、彩花の園、岩地の雑木林、大地の傷痕",
+    "monster": "マンドラゴラ、ホワイトルート、アルラウネ、キンモクジュ、一本角",
+    "shop" : "マルグリット"
+  }
+}
