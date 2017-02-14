@@ -33,8 +33,6 @@ class MessageModel {
 			} else {
 				$this->setMultiMaterialMessage();
 			}
-
-            $this->setSingleMaterialMessage();
         } else if ($operation == "join") {
             $this->setJoinedMessage();
         } else if ($operation == "reserve"){
@@ -59,6 +57,16 @@ class MessageModel {
 
 		if ($result) {
 			$this->messageArray[] = LineMessageUtil::getImageMessage($result["image_url"],$result["image_url"]);
+			$message = <<<EOT
+レベル　：{$result["level"]}
+色　　　：{$result["color"]}
+価格　　：{$result["price"]}
+カテゴリ：{$result["caterory"]}
+採取地　：{$result["price"]}
+こんな感じだよ！！！
+EOT;
+			$this->messageArray[] = LineMessageUtil::getTextMessage($message);
+
 		} else {
 			$this->messageArray[] = LineMessageUtil::getTextMessage("ごめん。わからなかった...");
 		}

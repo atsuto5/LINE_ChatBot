@@ -14,6 +14,11 @@ class LineMessageUtil {
         );
     }
 
+	/**
+	 * @param $originUrl
+	 * @param $previewUrl
+	 * @return array
+	 */
     public static function getImageMessage($originUrl,$previewUrl) {
         return array(
             "type" => "image",
