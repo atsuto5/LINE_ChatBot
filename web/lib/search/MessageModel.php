@@ -12,6 +12,7 @@ class MessageModel {
 
     private $searchModel;
     private $messageObject;
+	private $materialDetail;
 
     /**
      * MessageModel constructor.
@@ -19,6 +20,7 @@ class MessageModel {
      */
     public function __construct($searchModel) {
         $this->searchModel = $searchModel;
+		$this->materialDetail = json_decode("./data/material.json");
         $operation = $this->searchModel->getOperation();
 
         if ($operation == "none") {
@@ -47,6 +49,8 @@ class MessageModel {
 
     private function setSingleMaterialMessage() {
         $this->messageObject = LineMessageUtil::getTextMessage($this->searchModel->getMaterials()[0]."を探してくるよ！！");
+
+		error_log(print_r($this->materialDetail,true));
     }
 
     private function setMultiMaterialMessage() {
