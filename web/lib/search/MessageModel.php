@@ -77,6 +77,7 @@ EOT;
     private function setMultiMaterialMessage() {
 
 		$message = "もしかして・・・\n";
+		error_log(print_r(this->searchModel->getMaterials(),true));
 		foreach ($this->searchModel->getMaterials() as $material) {
 			$message .= $material;
 		}
