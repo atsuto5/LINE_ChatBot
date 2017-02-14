@@ -61,7 +61,7 @@ class MessageModel {
 レベル　：{$result["level"]}
 色　　　：{$result["color"]}
 価格　　：{$result["price"]}
-カテゴリ：{$result["caterory"]}
+カテゴリ：{$result["category"]}
 採取地　：{$result["price"]}
 こんな感じだよ！！！
 EOT;
