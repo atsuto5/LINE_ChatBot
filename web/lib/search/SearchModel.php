@@ -113,23 +113,17 @@ class SearchModel {
     }
 
     private function setMaterial() {
-        foreach ($this->tokenModel->getToken() as $token) {
+		foreach (DicConstant::getMaterialWords() as $word) {
+			$result = 0;
+			$nounsText = $this->tokenModel->getNounsText();
+			similar_text($nounsText,$word,$result);
 
-            if (strlen($token->surface) <= 1) {
-                continue;
-            }
+			error_log($nounsText."と".$word."の類似度は".$result);
 
-            //Material Search
-            foreach (DicConstant::getMaterialWords() as $word) {
-                $result = 0;
-                similar_text($token->surface,$word,$result);
-                error_log($token->surface."と".$word."の類似度は".$result);
-
-                if ($result > $this->materialLimit) {
-                    $this->materials[] = $token->surface;
-                }
-            }
-        }
+			if ($result > $this->materialLimit) {
+				$this->materials[] =$word;
+			}
+		}
     }
 
     /**

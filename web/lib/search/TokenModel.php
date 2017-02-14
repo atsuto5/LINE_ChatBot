@@ -58,6 +58,9 @@ class TokenModel {
 		return $result;
 	}
 
+	/**
+	 * @return array
+	 */
 	public function getNouns() {
 		$result = array();
 
@@ -66,6 +69,17 @@ class TokenModel {
 				$result[] = $token;
 			}
 		}
+		return $result;
+	}
+
+	public function getNounsText() {
+		$nouns = $this->getNouns();
+		$result = "";
+
+		foreach ($nouns as $noun) {
+			$result .= $noun->surface;
+		}
+
 		return $result;
 	}
 }
