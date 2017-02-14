@@ -65,7 +65,6 @@ class MessageModel {
 価格　　：{$result["price"]}
 カテゴリ：{$result["category"]}
 採取地　：{$result["price"]}
-こんな感じだよ！！！
 EOT;
 			$this->messageArray[] = LineMessageUtil::getTextMessage($message);
 
@@ -99,8 +98,19 @@ EOT;
 			$this->searchModel->getReservedMessageKey() == "2"
 		) {
 			$message = <<<EOT
-ヘルプだよ！！
+私はこんなことがわかるよ！
 EOT;
+			$message .= "素材\n";
+			foreach (DicConstant::getMaterialWords() as $word) {
+				$message .= "{$word}\n";
+			}
+
+			$message .= "\n";
+			$message .= "場所\n";
+			foreach (DicConstant::getPriceWords() as $word) {
+				$message .= "{$word}\n";
+			}
+
 			$this->messageArray[] = LineMessageUtil::getTextMessage($message);
 
 		}

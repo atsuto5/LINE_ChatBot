@@ -32,6 +32,15 @@ class DicConstant {
         );
     }
 
+	public static function getPriceWords() {
+		return array (
+			"巡礼街道",
+			"彩花の園",
+			"岩地の雑木林",
+			"大地の傷痕"
+		);
+	}
+
     public static function getReservedWords() {
         return array (
             "1" => array("noun" => "何","verb" => "できる|わかる"),
