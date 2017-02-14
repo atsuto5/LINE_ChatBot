@@ -99,14 +99,15 @@ EOT;
 		) {
 			$message = <<<EOT
 私はこんなことがわかるよ！
+
 EOT;
-			$message .= "素材\n";
+			$message .= "[素材]\n";
 			foreach (DicConstant::getMaterialWords() as $word) {
 				$message .= "{$word}\n";
 			}
 
 			$message .= "\n";
-			$message .= "場所\n";
+			$message .= "[場所]\n";
 			foreach (DicConstant::getPriceWords() as $word) {
 				$message .= "{$word}\n";
 			}
