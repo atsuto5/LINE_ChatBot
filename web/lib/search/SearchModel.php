@@ -102,18 +102,13 @@ class SearchModel {
             case "2" :
                 break;
             case "3" :
-                error_log("wakeUp save true");
-                $this->memcacheUtil->set("wakeUp",true);
                 break;
             case "4" :
-                error_log("wakeUp save false");
-                $this->memcacheUtil->set("wakeUp",false);
                 break;
         }
     }
 
     private function checkReservedWord() {
-
         foreach (DicConstant::getReservedWords() as $key => $words) {
             foreach ($words as $word) {
                 $sim = self::levenshteinNormalizedUtf8($this->tokenModel->getOriginText(),$word);

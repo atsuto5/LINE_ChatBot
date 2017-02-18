@@ -53,10 +53,18 @@ $app->post('/callback', function (Request $request) use ($app) {
     error_log(print_r($messageModel->getMessage(),true));
     error_log($memcacheUtil->get("wakeUp"));
 
+    if ($searchModel->getReservedMessageKey() == "3") { //wakeUp
+        $memcacheUtil->set("wakeUp",true);
+    }
+
     if($memcacheUtil->get("wakeUp")) {
         if ($messageModel->isResponseMessage()) {
             $lineClient->send($replyToken, $messageModel->getMessage());
         }
+    }
+
+    if ($searchModel->getReservedMessageKey() == "4") { //sleep
+        $memcacheUtil->set("wakeUp",false);
     }
 
     return 'OK';
