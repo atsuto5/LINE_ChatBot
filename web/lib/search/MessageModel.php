@@ -17,6 +17,7 @@ class MessageModel {
     private $searchModel;
     private $messageArray;
 	private $materialDetail;
+	private $isReturnMessage;
 
     /**
      * MessageModel constructor.
@@ -26,25 +27,35 @@ class MessageModel {
         $this->searchModel = $searchModel;
 		$this->materialDetail = json_decode(file_get_contents("./data/material.json"),true);
 		$this->messageArray = array();
+		$this->isReturnMessage = true;
         $operation = $this->searchModel->getOperation();
 
-        if ($operation == "none") {
-            $this->setNoneMessage();
-        } else if ($operation == "search") {
-			$materials = $this->searchModel->getMaterials();
-			if (count($materials) == 0) {
-				$this->setNoneMessage();
-			} else if (count($materials) == 1) {
-				$this->setSingleMaterialMessage();
-			} else {
-				$this->setMultiMaterialMessage();
-			}
-        } else if ($operation == "join") {
-            $this->setJoinedMessage();
-        } else if ($operation == "reserve"){
-			$this->setReservedMessage();
-		} else {
-            $this->setNoneMessage();
+        switch ($operation) {
+            case "none":
+                $this->setNoneMessage();
+                break;
+            case "search":
+                $materials = $this->searchModel->getMaterials();
+                if (count($materials) == 0) {
+                    $this->setNoneMessage();
+                } else if (count($materials) == 1) {
+                    $this->setSingleMaterialMessage();
+                } else {
+                    $this->setMultiMaterialMessage();
+                }
+                break;
+            case "join":
+                $this->setJoinedMessage();
+                break;
+            case "reserve" :
+                $this->setReservedMessage();
+                break;
+            case "postback" :
+                $this->isReturnMessage = false;
+                break;
+            default :
+                $this->setNoneMessage();
+                break;
         }
     }
 
@@ -142,5 +153,11 @@ EOT;
 		$this->messageArray[] = LineMessageUtil::getTextMessage($message);
     }
 
-
+    /**
+     * @return bool
+     */
+    public function isReturnMessage()
+    {
+        return $this->isReturnMessage;
+    }
 }

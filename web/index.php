@@ -50,8 +50,9 @@ $app->post('/callback', function (Request $request) use ($app) {
     error_log("text ".$text);
     error_log(print_r($messageModel->getMessage(),true));
 
-    $lineClient->send($replyToken,$messageModel->getMessage());
-
+    if ($messageModel->isReturnMessage()) {
+        $lineClient->send($replyToken,$messageModel->getMessage());
+    }
     return 'OK';
 });
 
