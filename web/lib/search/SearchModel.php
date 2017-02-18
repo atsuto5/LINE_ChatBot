@@ -139,7 +139,7 @@ class SearchModel {
      */
     public function getMaterials()
     {
-        return DicConstant::getMaterialWords();//$this->materials;
+        return $this->materials;
     }
 
 	/**
