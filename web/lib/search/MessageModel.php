@@ -51,7 +51,7 @@ class MessageModel {
                 $this->setReservedMessage();
                 break;
             case "postback" :
-                $this->isReturnMessage = false;
+                $this->setIsReturnMessage(false);
                 break;
             default :
                 $this->setNoneMessage();
@@ -151,6 +151,14 @@ EOT;
 わからないことがあったら、なんでも聞いてね！
 EOT;
 		$this->messageArray[] = LineMessageUtil::getTextMessage($message);
+    }
+
+    /**
+     * @param bool $isReturnMessage
+     */
+    public function setIsReturnMessage($isReturnMessage)
+    {
+        $this->isReturnMessage = $isReturnMessage;
     }
 
     /**
