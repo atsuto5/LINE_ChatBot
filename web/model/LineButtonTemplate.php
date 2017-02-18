@@ -86,12 +86,18 @@ class LineButtonTemplate implements TemplateInterface {
     }
 
     public function getTemplateObject() {
+
+        $actionArray = array();
+        foreach ($this->actions as $action) {
+            $actionArray[] = $action->getAction();
+        }
+
         return array(
             "type" => $this->type,
             "thumbnailImageUrl" => $this->thumbnailImageUrl,
             "title" => $this->title,
             "text" => $this->text,
-            "actions" => $this->actions
+            "actions" => $actionArray
         );
     }
 }
