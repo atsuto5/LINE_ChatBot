@@ -85,14 +85,10 @@ EOT;
 
     private function setMultiMaterialMessage() {
 
-		$message = "もしかして・・・\n";
-		error_log(print_r($this->searchModel->getMaterials(),true));
+        error_log("mult");
 		foreach ($this->searchModel->getMaterials() as $material) {
-			$message .= $material;
-		}
-		$message .= "のこと？";
 
-		$this->messageArray[] = LineMessageUtil::getTextMessage($message);
+		}
     }
 
     private function setNoneMessage() {
