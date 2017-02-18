@@ -7,6 +7,9 @@
  */
 class DicConstant {
 
+    const HELP = "0";
+    const SEARCH_DETAIL = "1";
+
     public static function getSearchWords() {
         return array (
             "検索",
@@ -43,7 +46,7 @@ class DicConstant {
 
     public static function getReservedWords() {
         return array (
-            "1" => array(
+            self::HELP => array(
                 "何ができる",
                 "何がわかる",
                 "ヘルプ"

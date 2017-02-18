@@ -113,32 +113,37 @@ EOT;
         $this->messageArray[] = LineMessageUtil::getTemplateMessage("tes",$carouselTemplate);
     }
 
-    private function setReservedMessage() {
-		if ($this->searchModel->getReservedMessageKey() == "1") {
-			$message = <<<EOT
+    private function setReservedMessage()
+    {
+        switch ($this->searchModel->getReservedMessageKey()) {
+            case HELP :
+                $message = <<<EOT
 私はこんなことがわかるよ！
 
 EOT;
-			$message .= "[素材]\n";
-			foreach (DicConstant::getMaterialWords() as $word) {
-				$message .= "{$word}\n";
-			}
+                $message .= "[素材]\n";
+                foreach (DicConstant::getMaterialWords() as $word) {
+                    $message .= "{$word}\n";
+                }
 
-			$message .= "\n";
-			$message .= "[場所]\n";
-			foreach (DicConstant::getPriceWords() as $word) {
-				$message .= "{$word}\n";
-			}
+                $message .= "\n";
+                $message .= "[場所]\n";
+                foreach (DicConstant::getPriceWords() as $word) {
+                    $message .= "{$word}\n";
+                }
 
-			$this->messageArray[] = LineMessageUtil::getTextMessage($message);
-		} else if ($this->searchModel->getReservedMessageKey() == "2") {
-
-        } else if ($this->searchModel->getReservedMessageKey() == "3") {
-		    $this->setWakeUpMessage();
-        } else if ($this->searchModel->getReservedMessageKey() == "4") {
-            $this->setSleepMessage();
+                $this->messageArray[] = LineMessageUtil::getTextMessage($message);
+                break;
+            case "2":
+                break;
+            case "3":
+                $this->setWakeUpMessage();
+                break;
+            case "4":
+                $this->setSleepMessage();
+                break;
         }
-	}
+    }
 
     private function setNoneMessage() {
         $noneMessages = DicConstant::getNoneMessages();
