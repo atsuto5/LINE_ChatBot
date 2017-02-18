@@ -117,24 +117,10 @@ EOT;
     {
         switch ($this->searchModel->getReservedMessageKey()) {
             case HELP :
-                $message = <<<EOT
-私はこんなことがわかるよ！
-
-EOT;
-                $message .= "[素材]\n";
-                foreach (DicConstant::getMaterialWords() as $word) {
-                    $message .= "{$word}\n";
-                }
-
-                $message .= "\n";
-                $message .= "[場所]\n";
-                foreach (DicConstant::getPriceWords() as $word) {
-                    $message .= "{$word}\n";
-                }
-
-                $this->messageArray[] = LineMessageUtil::getTextMessage($message);
+                $this->setHelpMessage();
                 break;
             case SEARCH_DETAIL:
+                $this->setSearchDetailMessage();
                 break;
             case WAKEUP:
                 $this->setWakeUpMessage();
@@ -143,6 +129,31 @@ EOT;
                 $this->setSleepMessage();
                 break;
         }
+    }
+
+    private function setHelpMessage() {
+        $message = <<<EOT
+私はこんなことがわかるよ！
+
+EOT;
+        $message .= "[素材]\n";
+        foreach (DicConstant::getMaterialWords() as $word) {
+            $message .= "{$word}\n";
+        }
+
+        $message .= "\n";
+        $message .= "[場所]\n";
+        foreach (DicConstant::getPriceWords() as $word) {
+            $message .= "{$word}\n";
+        }
+
+        $this->messageArray[] = LineMessageUtil::getTextMessage($message);
+    }
+
+    private function setSearchDetailMessage() {
+        error_log(print_r($this->searchModel->getMaterials(),true);
+
+        //$this->messageArray[] = LineMessageUtil::getTextMessage($message);
     }
 
     private function setNoneMessage() {
