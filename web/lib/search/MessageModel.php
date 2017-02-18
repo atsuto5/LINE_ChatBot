@@ -17,7 +17,7 @@ class MessageModel {
     private $searchModel;
     private $messageArray;
 	private $materialDetail;
-	private $isReturnMessage;
+	private $isResponseMessage;
 
     /**
      * MessageModel constructor.
@@ -27,7 +27,7 @@ class MessageModel {
         $this->searchModel = $searchModel;
 		$this->materialDetail = json_decode(file_get_contents("./data/material.json"),true);
 		$this->messageArray = array();
-		$this->isReturnMessage = true;
+		$this->isResponseMessage = true;
         $operation = $this->searchModel->getOperation();
 
         switch ($operation) {
@@ -51,7 +51,7 @@ class MessageModel {
                 $this->setReservedMessage();
                 break;
             case "postback" :
-                $this->setIsReturnMessage(false);
+                $this->setIsResponseMessage(false);
                 break;
             default :
                 $this->setNoneMessage();
@@ -113,16 +113,8 @@ EOT;
         $this->messageArray[] = LineMessageUtil::getTemplateMessage("tes",$carouselTemplate);
     }
 
-    private function setNoneMessage() {
-        $noneMessages = DicConstant::getNoneMessages();
-        shuffle($noneMessages);
-		$this->messageArray[] = LineMessageUtil::getTextMessage($noneMessages[0]);
-    }
-
     private function setReservedMessage() {
-		if ($this->searchModel->getReservedMessageKey() == "1" ||
-			$this->searchModel->getReservedMessageKey() == "2"
-		) {
+		if ($this->searchModel->getReservedMessageKey() == "1") {
 			$message = <<<EOT
 私はこんなことがわかるよ！
 
@@ -139,10 +131,32 @@ EOT;
 			}
 
 			$this->messageArray[] = LineMessageUtil::getTextMessage($message);
+		} else if ($this->searchModel->getReservedMessageKey() == "2") {
 
-		}
-
+        } else if ($this->searchModel->getReservedMessageKey() == "3") {
+		    $this->setWakeUpMessage();
+        } else if ($this->searchModel->getReservedMessageKey() == "4") {
+            $this->setSleepMessage();
+        }
 	}
+
+    private function setNoneMessage() {
+        $noneMessages = DicConstant::getNoneMessages();
+        shuffle($noneMessages);
+        $this->messageArray[] = LineMessageUtil::getTextMessage($noneMessages[0]);
+    }
+
+    private function setWakeUpMessage() {
+        $wakeUpMessages = DicConstant::getWakeUpMessages();
+        shuffle($wakeUpMessages);
+        $this->messageArray[] = LineMessageUtil::getTextMessage($wakeUpMessages[0]);
+    }
+
+    private function setSleepMessage() {
+        $sleepMessages = DicConstant::getSleepMessages();
+        shuffle($sleepMessages);
+        $this->messageArray[] = LineMessageUtil::getTextMessage($sleepMessages[0]);
+    }
 
     private function setJoinedMessage() {
         $message = <<<EOT
@@ -154,18 +168,18 @@ EOT;
     }
 
     /**
-     * @param bool $isReturnMessage
+     * @param bool $isResponseMessage
      */
-    public function setIsReturnMessage($isReturnMessage)
+    public function setIsResponseMessage($isResponseMessage)
     {
-        $this->isReturnMessage = $isReturnMessage;
+        $this->isResponseMessage = $isResponseMessage;
     }
 
     /**
      * @return bool
      */
-    public function isReturnMessage()
+    public function isResponseMessage()
     {
-        return $this->isReturnMessage;
+        return $this->isResponseMessage;
     }
 }

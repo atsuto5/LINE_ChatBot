@@ -53,7 +53,7 @@ $app->post('/callback', function (Request $request) use ($app) {
     error_log(print_r($messageModel->getMessage(),true));
 
     if($memcacheUtil->get("wakeUp")) {
-        if ($messageModel->isReturnMessage()) {
+        if ($messageModel->isResponseMessage()) {
             $lineClient->send($replyToken, $messageModel->getMessage());
         }
     }

@@ -81,4 +81,24 @@ class DicConstant {
         );
     }
 
+    public static function getWakeUpMessages() {
+        return array(
+            "はい！",
+            "はいは〜い",
+            "聞いてるよー",
+            "どうかした？",
+            "ん？"
+        );
+    }
+
+    public static function getSleepMessages() {
+        return array(
+            "おやすみ！",
+            "寝ま〜す",
+            "じゃあねー",
+            "またね〜",
+            "用済みですか・・・"
+        );
+    }
+
 }
