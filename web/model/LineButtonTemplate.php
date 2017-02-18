@@ -17,7 +17,7 @@ class LineButtonTemplate implements TemplateInterface {
     public function __construct() {
         $this->thumbnailImageUrl = "";
         $this->title = "";
-        $this->text = "";
+        $this->text = "default";
         $this->actions = array();
     }
 
