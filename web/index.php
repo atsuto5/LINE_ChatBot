@@ -6,6 +6,7 @@ require_once ('./lib/search/TokenModel.php');
 require_once ('./lib/search/SearchModel.php');
 require_once ('./lib/search/MessageModel.php');
 require_once ('./lib/MemcacheUtil.php');
+require_once ('./model/LineRequestModel.php');
 
 use Symfony\Component\HttpFoundation\Request;
 
@@ -33,15 +34,24 @@ $app->get('/', function() use($app) {
 
 $app->post('/callback', function (Request $request) use ($app) {
 
-    $memcacheUtil = new MemcacheUtil();
-
     $lineClient = new LineClient();
+    error_log(print_r($request,true));
+
     $body = json_decode($request->getContent(), true);
     error_log($request->getContent());
 
     $eventType = $body["events"][0]["type"];
     $replyToken = $body["events"][0]["replyToken"];
     $text = $body["events"][0]["message"]["text"];
+    $roomType = $body["events"][0]["source"]["type"];
+    $key = "";
+    if ($roomType == "user") {
+        $key = $body["events"][0]["source"]["userId"];
+    } else if ($roomType == "group") {
+        $key = $body["events"][0]["source"]["groupId"];
+    }
+
+    $memcacheUtil = new MemcacheUtil($key);
 
     $tokenModel = new TokenModel($text);
     $searchModel = new SearchModel($tokenModel,$eventType);
@@ -52,6 +62,11 @@ $app->post('/callback', function (Request $request) use ($app) {
     error_log("text ".$text);
     error_log(print_r($messageModel->getMessage(),true));
     error_log($memcacheUtil->get("wakeUp"));
+
+    if ($searchModel->getOperation() == "join") { //joinのときは起きてるかどうかにかかわらず返信する。
+        $lineClient->send($replyToken, $messageModel->getMessage());
+        return 'OK';
+    }
 
     if ($searchModel->getReservedMessageKey() == "3") { //wakeUp
         $memcacheUtil->set("wakeUp",true);

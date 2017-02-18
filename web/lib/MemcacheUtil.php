@@ -10,8 +10,9 @@ use MemCachier\MemcacheSASL;
 class MemcacheUtil {
 
     private $memcache;
+    private $roomKey;
 
-    public function __construct() {
+    public function __construct($key) {
         // Create client
         $this->memcache = new MemcacheSASL();
         $servers = explode(",", getenv("MEMCACHIER_SERVERS"));
@@ -23,6 +24,7 @@ class MemcacheUtil {
         // Setup authentication
         $this->memcache->setSaslAuthData( getenv("MEMCACHIER_USERNAME")
             , getenv("MEMCACHIER_PASSWORD") );
+        $this->roomKey = $key;
     }
 
     /**
@@ -30,7 +32,7 @@ class MemcacheUtil {
      * @param array|bool|float|int|mixed|string $value
      */
     public function add($key,$value) {
-        $this->memcache->add($key,$value);
+        $this->memcache->add($this->roomKey."_".$key,$value);
     }
 
     /**
@@ -38,7 +40,7 @@ class MemcacheUtil {
      * @param array|bool|float|int|mixed|string $value
      */
     public function set($key,$value) {
-        $this->memcache->set($key,$value);
+        $this->memcache->set($this->roomKey."_".$key,$value);
     }
 
     /**
@@ -46,6 +48,6 @@ class MemcacheUtil {
      * @return array|bool|float|int|mixed|string
      */
     public function get($key) {
-        return $this->memcache->get($key);
+        return $this->memcache->get($this->roomKey."_".$key);
     }
 }

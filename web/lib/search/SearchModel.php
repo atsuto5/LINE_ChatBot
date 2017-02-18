@@ -7,7 +7,6 @@
  */
 
 require_once ('./lib/search/DicConstant.php');
-require_once ('./lib/MemcacheUtil.php');
 
 class SearchModel {
 
@@ -20,7 +19,6 @@ class SearchModel {
     private $materialLimit = 60;
     private $reservedLimit = 0.7;
     private $reservedMessageKey = false;
-    private $memcacheUtil;
     /**
      * SearchModel constructor.
      * @param TokenModel $tokenModel
@@ -29,7 +27,6 @@ class SearchModel {
     public function __construct($tokenModel,$eventType = null) {
         $this->tokenModel = $tokenModel;
         $this->eventType = $eventType;
-        $this->memcacheUtil = new MemcacheUtil();
 
         $this->setOperation();
         $this->materials = array();
