@@ -32,11 +32,11 @@ class SearchModel {
         $this->materials = array();
 
         error_log($this->operation);
-        if ($this->operation == "none") {
+        if ($this->operation == NONE) {
             return;
-        } else if ($this->operation == "search") {
+        } else if ($this->operation == SEARCH) {
             $this->setMaterial();
-        } else if ($this->operation == "reserve") {
+        } else if ($this->operation == RESERVE) {
             $this->reserveAction();
         }
     }
@@ -47,16 +47,16 @@ class SearchModel {
         if (!is_null($this->eventType)) {
             switch ($this->eventType) {
                 case "join":
-                    $this->operation = "join";
+                    $this->operation = JOIN;
                     return;
                 case "postback":
-                    $this->operation = "postback";
+                    $this->operation = POSTBACK;
                     return;
             }
         }
 
         if ($this->checkReservedWord()) {
-            $this->operation = "reserve";
+            $this->operation = RESERVE;
             return;
         }
 
@@ -70,13 +70,13 @@ class SearchModel {
                 error_log($token->surface."と".$word."の類似度は".$result);
 
                 if ($result > $this->searchLimit) {
-                    $this->operation = "search";
+                    $this->operation = SEARCH;
                     return;
                 }
             }
         }
 
-        $this->operation = "none";
+        $this->operation = NONE;
         return;
     }
 
@@ -96,11 +96,13 @@ class SearchModel {
 
     private function reserveAction() {
         switch ($this->reservedMessageKey) {
-            case "2" :
+            case HELP:
                 break;
-            case "3" :
+            case SEARCH_DETAIL :
                 break;
-            case "4" :
+            case WAKEUP :
+                break;
+            case SLEEP :
                 break;
         }
     }

@@ -46,12 +46,12 @@ $app->post('/callback', function (Request $request) use ($app) {
     error_log(print_r($messageModel->getMessage(),true));
     error_log($memcacheUtil->get("wakeUp"));
 
-    if ($searchModel->getOperation() == "join") { //joinのときは起きてるかどうかにかかわらず返信する。
+    if ($searchModel->getOperation() == JOIN) { //joinのときは起きてるかどうかにかかわらず返信する。
         $lineClient->send($lineRequestModel->getReplyToken(), $messageModel->getMessage());
         return 'OK';
     }
 
-    if ($searchModel->getReservedMessageKey() == "3") { //wakeUp
+    if ($searchModel->getReservedMessageKey() == WAKEUP) {
         $memcacheUtil->set("wakeUp",true);
     }
 
@@ -61,7 +61,7 @@ $app->post('/callback', function (Request $request) use ($app) {
         }
     }
 
-    if ($searchModel->getReservedMessageKey() == "4") { //sleep
+    if ($searchModel->getReservedMessageKey() == SLEEP) {
         $memcacheUtil->set("wakeUp",false);
     }
 

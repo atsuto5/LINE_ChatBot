@@ -31,10 +31,10 @@ class MessageModel {
         $operation = $this->searchModel->getOperation();
 
         switch ($operation) {
-            case "none":
+            case NONE:
                 $this->setNoneMessage();
                 break;
-            case "search":
+            case SEARCH:
                 $materials = $this->searchModel->getMaterials();
                 if (count($materials) == 0) {
                     $this->setNoneMessage();
@@ -44,13 +44,13 @@ class MessageModel {
                     $this->setMultiMaterialMessage();
                 }
                 break;
-            case "join":
+            case JOIN:
                 $this->setJoinedMessage();
                 break;
-            case "reserve" :
+            case RESERVE :
                 $this->setReservedMessage();
                 break;
-            case "postback" :
+            case POSTBACK :
                 $this->setIsResponseMessage(false);
                 break;
             default :
@@ -134,12 +134,12 @@ EOT;
 
                 $this->messageArray[] = LineMessageUtil::getTextMessage($message);
                 break;
-            case "2":
+            case SEARCH_DETAIL:
                 break;
-            case "3":
+            case WAKEUP:
                 $this->setWakeUpMessage();
                 break;
-            case "4":
+            case SLEEP:
                 $this->setSleepMessage();
                 break;
         }
