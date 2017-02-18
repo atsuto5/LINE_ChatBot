@@ -89,10 +89,11 @@ EOT;
 
         $carouselTemplate = new LineCarouselTemplate();
 		foreach ($this->searchModel->getMaterials() as $material) {
+            $detail = $this->materialDetail[$material];
 
             $columnTemplate = new CarouselColumnTemplate();
-            $columnTemplate->setThumbnailImageUrl($material["image_url"]);
-            $columnTemplate->setTitle($material["name"]);
+            $columnTemplate->setThumbnailImageUrl($detail["image_url"]);
+            $columnTemplate->setTitle($detail["name"]);
 
             $postBackAction = new PostBackTemplateAction();
             $postBackAction->setLabel("もっと詳しく");
