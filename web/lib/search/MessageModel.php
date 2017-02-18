@@ -90,6 +90,7 @@ EOT;
             $columnTemplate = new CarouselColumnTemplate();
             $columnTemplate->setThumbnailImageUrl($detail["image_url"]);
             $columnTemplate->setTitle($detail["name"]);
+            $columnTemplate->setText($detail["name"]."をもっと詳しく教えて");
 
             $postBackAction = new PostBackTemplateAction();
             $postBackAction->setLabel("もっと詳しく");
