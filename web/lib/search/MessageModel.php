@@ -7,7 +7,7 @@
  */
 require_once ('./lib/LineMessageUtil.php');
 require_once ('./lib/search/DicConstant.php');
-require_once ('./lib/model/LineButtonTemplate.php');
+require_once ('./model/LineButtonTemplate.php');
 
 class MessageModel {
 
