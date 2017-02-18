@@ -1,10 +1,4 @@
 <?php
-ini_set('session.save_handler', 'memcached');
-ini_set('session.save_path', 'PERSISTENT=pool ' . getenv('MEMCACHIER_SERVERS'));
-ini_set('memcached.sess_binary', 1);
-ini_set('memcached.sess_sasl_username', getenv('MEMCACHIER_USERNAME'));
-ini_set('memcached.sess_sasl_password', getenv('MEMCACHIER_PASSWORD'));
-
 require('../vendor/autoload.php');
 require_once ('./lib/LineMessageUtil.php');
 require_once ('./lib/LineClient.php');
@@ -15,7 +9,6 @@ require_once ('./lib/search/MessageModel.php');
 use Symfony\Component\HttpFoundation\Request;
 
 date_default_timezone_set("Asia/Tokyo");
-session_start();
 
 $app = new Silex\Application();
 $app['debug'] = true;
@@ -59,10 +52,6 @@ $app->post('/callback', function (Request $request) use ($app) {
     if ($messageModel->isReturnMessage()) {
         $lineClient->send($replyToken,$messageModel->getMessage());
     }
-
-    error_log($_SESSION["te"]);
-
-    $_SESSION["te"] = "いいい";
 
     return 'OK';
 });
