@@ -8,7 +8,7 @@
 require_once ('./lib/LineMessageUtil.php');
 require_once ('./lib/search/DicConstant.php');
 require_once ('./model/LineButtonTemplate.php');
-require_once ('./model/UriTemplateAction.php');
+require_once ('./model/PostBackTemplateAction.php');
 
 class MessageModel {
 
@@ -62,9 +62,9 @@ class MessageModel {
 		    $buttonTemplate->setThumbnailImageUrl($result["image_url"]);
 		    $buttonTemplate->setTitle($result["name"]);
 
-		    $postBackAction = new UriTemplateAction();
+		    $postBackAction = new PostBackTemplateAction();
 		    $postBackAction->setLabel("もっと詳しく");
-            $postBackAction->setUri("https://host=shrouded-badlands-61521.herokuapp.com/uri_action_callback");
+            $postBackAction->setData("data");
 
             $buttonTemplate->addAction($postBackAction);
             $this->messageArray[] = LineMessageUtil::getTemplateMessage("tes",$buttonTemplate);
