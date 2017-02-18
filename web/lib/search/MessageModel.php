@@ -105,19 +105,23 @@ EOT;
 		foreach ($this->searchModel->getSimilarMaterials() as $material) {
             $detail = $this->materialDetail[$material];
 
+            $message = <<<EOT
+カテゴリ：{$detail["category"]}
+EOT;
             $columnTemplate = new CarouselColumnTemplate();
             $columnTemplate->setThumbnailImageUrl($detail["image_url"]);
             $columnTemplate->setTitle($detail["name"]);
+            $columnTemplate->setText($message);
 
             $postBackAction = new PostBackTemplateAction();
             $postBackAction->setLabel("もっと詳しく");
-            $postBackAction->setData("data");
+            $postBackAction->setData($detail["name"]);
+            $postBackAction->setText($detail["name"]."をもっと詳しく教えて");
 
             $columnTemplate->addAction($postBackAction);
             $carouselTemplate->addColumn($columnTemplate);
 		}
 
-		error_log(print_r($carouselTemplate,true));
         $this->messageArray[] = LineMessageUtil::getTemplateMessage("tes",$carouselTemplate);
     }
 
