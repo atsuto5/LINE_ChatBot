@@ -7,6 +7,7 @@
  */
 
 require_once ('./lib/search/DicConstant.php');
+require_once ('./lib/MemcacheUtil.php');
 
 class SearchModel {
 
@@ -19,6 +20,7 @@ class SearchModel {
     private $materialLimit = 60;
     private $reservedLimit = 0.7;
     private $reservedMessageKey = false;
+    private $memcacheUtil;
     /**
      * SearchModel constructor.
      * @param TokenModel $tokenModel
@@ -27,6 +29,7 @@ class SearchModel {
     public function __construct($tokenModel,$eventType = null) {
         $this->tokenModel = $tokenModel;
         $this->eventType = $eventType;
+        $this->memcacheUtil = new MemcacheUtil();
 
         $this->setOperation();
         $this->materials = array();
@@ -36,29 +39,9 @@ class SearchModel {
             return;
         } else if ($this->operation == "search") {
             $this->setMaterial();
+        } else if ($this->operation == "reserve") {
+            $this->reserveAction();
         }
-    }
-
-    private function checkReservedWord() {
-
-		foreach (DicConstant::getReservedWords() as $key => $words) {
-		    foreach ($words as $word) {
-                $sim = self::levenshteinNormalizedUtf8($this->tokenModel->getOriginText(),$word);
-                error_log($this->tokenModel->getOriginText()."と".$word."のレーベンシュタイン距離：".$sim);
-
-                if ($sim > $this->reservedLimit) {
-                    $this->reservedMessageKey = $key;
-                    return true;
-                }
-
-                //文字列が含まれている場合も予約語判定する。
-                if (mb_strpos($this->tokenModel->getOriginText(),$word, 0, "UTF-8") !== false) {
-                    $this->reservedMessageKey = $key;
-                    return true;
-                }
-            }
-		}
-		return false;
     }
 
     private function setOperation() {
@@ -112,6 +95,41 @@ class SearchModel {
 				$this->materials[] =$word;
 			}
 		}
+    }
+
+    private function reserveAction() {
+        switch ($this->reservedMessageKey) {
+            case "2" :
+                break;
+            case "3" :
+                $this->memcacheUtil->add("wakeUp",true);
+                break;
+            case "4" :
+                $this->memcacheUtil->add("wakeUp",false);
+                break;
+        }
+    }
+
+    private function checkReservedWord() {
+
+        foreach (DicConstant::getReservedWords() as $key => $words) {
+            foreach ($words as $word) {
+                $sim = self::levenshteinNormalizedUtf8($this->tokenModel->getOriginText(),$word);
+                error_log($this->tokenModel->getOriginText()."と".$word."のレーベンシュタイン距離：".$sim);
+
+                if ($sim > $this->reservedLimit) {
+                    $this->reservedMessageKey = $key;
+                    return true;
+                }
+
+                //文字列が含まれている場合も予約語判定する。
+                if (mb_strpos($this->tokenModel->getOriginText(),$word, 0, "UTF-8") !== false) {
+                    $this->reservedMessageKey = $key;
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**

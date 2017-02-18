@@ -5,9 +5,9 @@ require_once ('./lib/LineClient.php');
 require_once ('./lib/search/TokenModel.php');
 require_once ('./lib/search/SearchModel.php');
 require_once ('./lib/search/MessageModel.php');
+require_once ('./lib/MemcacheUtil.php');
 
 use Symfony\Component\HttpFoundation\Request;
-use MemCachier\MemcacheSASL;
 
 date_default_timezone_set("Asia/Tokyo");
 
@@ -33,6 +33,8 @@ $app->get('/', function() use($app) {
 
 $app->post('/callback', function (Request $request) use ($app) {
 
+    $memcacheUtil = new MemcacheUtil();
+
     $lineClient = new LineClient();
     $body = json_decode($request->getContent(), true);
     error_log($request->getContent());
@@ -50,25 +52,11 @@ $app->post('/callback', function (Request $request) use ($app) {
     error_log("text ".$text);
     error_log(print_r($messageModel->getMessage(),true));
 
-    if ($messageModel->isReturnMessage()) {
-        $lineClient->send($replyToken,$messageModel->getMessage());
+    if($memcacheUtil->get("wakeUp")) {
+        if ($messageModel->isReturnMessage()) {
+            $lineClient->send($replyToken, $messageModel->getMessage());
+        }
     }
-
-    // Create client
-    $m = new MemcacheSASL();
-    $servers = explode(",", getenv("MEMCACHIER_SERVERS"));
-    foreach ($servers as $s) {
-        $parts = explode(":", $s);
-        $m->addServer($parts[0], $parts[1]);
-    }
-
-    // Setup authentication
-    $m->setSaslAuthData( getenv("MEMCACHIER_USERNAME")
-        , getenv("MEMCACHIER_PASSWORD") );
-
-    error_log($m->get("foo"));
-    // Test client
-    $m->add("foo", "bar");
 
     return 'OK';
 });
