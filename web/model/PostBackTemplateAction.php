@@ -15,7 +15,7 @@ class PostBackTemplateAction implements TemplateActionInterface {
     public function __construct() {
         $this->label = "";
         $this->data = "";
-        $this->text = "";
+        $this->text = "default";
     }
 
     /**
