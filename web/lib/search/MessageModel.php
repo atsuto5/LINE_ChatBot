@@ -102,7 +102,7 @@ EOT;
     private function setMultiMaterialMessage() {
 
         $carouselTemplate = new LineCarouselTemplate();
-		foreach ($this->searchModel->getMaterials() as $material) {
+		foreach ($this->searchModel->getSimilarMaterials() as $material) {
             $detail = $this->materialDetail[$material];
 
             $columnTemplate = new CarouselColumnTemplate();
