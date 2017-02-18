@@ -8,6 +8,7 @@
 require_once ('./lib/LineMessageUtil.php');
 require_once ('./lib/search/DicConstant.php');
 require_once ('./model/LineButtonTemplate.php');
+require_once ('./model/PostBackTemplateAction.php');
 
 class MessageModel {
 
