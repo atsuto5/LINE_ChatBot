@@ -8,6 +8,8 @@
 require_once ('./lib/LineMessageUtil.php');
 require_once ('./lib/search/DicConstant.php');
 require_once ('./model/LineButtonTemplate.php');
+require_once ('./model/LineCarouselTemplate.php');
+require_once ('./model/CarouselColumnTemplate.php');
 require_once ('./model/PostBackTemplateAction.php');
 
 class MessageModel {
@@ -85,10 +87,21 @@ EOT;
 
     private function setMultiMaterialMessage() {
 
-        error_log("mult");
+        $carouselTemplate = new LineCarouselTemplate();
 		foreach ($this->searchModel->getMaterials() as $material) {
 
+            $columnTemplate = new CarouselColumnTemplate();
+            $columnTemplate->setThumbnailImageUrl($material["image_url"]);
+            $columnTemplate->setTitle($material["name"]);
+
+            $postBackAction = new PostBackTemplateAction();
+            $postBackAction->setLabel("もっと詳しく");
+            $postBackAction->setData("data");
+
+            $columnTemplate->addAction($postBackAction);
+            $carouselTemplate->addColumn($columnTemplate);
 		}
+        $this->messageArray[] = LineMessageUtil::getTemplateMessage("tes",$carouselTemplate);
     }
 
     private function setNoneMessage() {

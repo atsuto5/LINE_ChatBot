@@ -1,6 +1,6 @@
 <?php
 require_once ('./model/TemplateInterface.php');
-require_once ('./model/LineButtonTemplate.php');
+require_once ('./model/CarouselColumnTemplate.php');
 /**
  * Created by IntelliJ IDEA.
  * User: haradakazumi
@@ -16,8 +16,8 @@ class LineCarouselTemplate implements TemplateInterface {
         $this->columns = array();
     }
 
-    public function addColumn(LineButtonTemplate $buttonTemplate) {
-        $this->columns[] = $buttonTemplate;
+    public function addColumn(CarouselColumnTemplate $columnTemplate) {
+        $this->columns[] = $columnTemplate;
 
         if (count($this->columns) > 5) {
             array_shift($this->columns);
