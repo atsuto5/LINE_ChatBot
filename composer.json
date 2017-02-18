@@ -5,7 +5,7 @@
     "twig/twig": "^1.8",
     "symfony/twig-bridge": "^2",
     "linecorp/line-bot-sdk": "^0.1.0",
-    "ext-memcached":"*"
+    "memcachier/php-memcache-sasl": ">=1.0.1"
   },
   "require-dev": {
     "heroku/heroku-buildpack-php": "*"

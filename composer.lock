@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "39f79bcc12fe6242acd4fe2104ade837",
+    "content-hash": "e5888151eda927738364cceac2cb8db7",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -207,6 +207,55 @@
                 "sdk"
             ],
             "time": "2016-04-27T10:59:13+00:00"
+        },
+        {
+            "name": "memcachier/php-memcache-sasl",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/memcachier/PHPMemcacheSASL.git",
+                "reference": "9b71d0d16fa8dd3f2f5fab98726963b46123ac9d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/memcachier/PHPMemcacheSASL/zipball/9b71d0d16fa8dd3f2f5fab98726963b46123ac9d",
+                "reference": "9b71d0d16fa8dd3f2f5fab98726963b46123ac9d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MemCachier\\": "src/MemCachier"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "MemCachier Inc",
+                    "email": "code@memcachier.com",
+                    "homepage": "https://www.memcachier.com/"
+                },
+                {
+                    "name": "Ronny Wang",
+                    "email": "ronnywang@gmail.com",
+                    "homepage": "http://ronnywang.pixnet.net/blog"
+                }
+            ],
+            "description": "A PHP Memcache client with binary protocol and SASL support",
+            "homepage": "https://github.com/memcachier/PHPMemcacheSASL",
+            "keywords": [
+                "binary",
+                "cache",
+                "memcache",
+                "sasl"
+            ],
+            "time": "2015-06-04T19:44:27+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -501,16 +550,16 @@
         },
         {
             "name": "symfony/debug",
-            "version": "v3.2.3",
+            "version": "v3.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "b4d9818f127c60ce21ed62c395da7df868dc8477"
+                "reference": "9b98854cb45bc59d100b7d4cc4cf9e05f21026b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/b4d9818f127c60ce21ed62c395da7df868dc8477",
-                "reference": "b4d9818f127c60ce21ed62c395da7df868dc8477",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/9b98854cb45bc59d100b7d4cc4cf9e05f21026b9",
+                "reference": "9b98854cb45bc59d100b7d4cc4cf9e05f21026b9",
                 "shasum": ""
             },
             "require": {
@@ -554,7 +603,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-28T02:37:08+00:00"
+            "time": "2017-02-16T16:34:18+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
