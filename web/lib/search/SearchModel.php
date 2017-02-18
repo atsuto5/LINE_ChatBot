@@ -14,6 +14,7 @@ class SearchModel {
 
     private $operation;
     private $materials;
+    private $eventType;
     private $searchLimit = 80;
     private $materialLimit = 60;
     private $reservedLimit = 8.0;
@@ -21,14 +22,11 @@ class SearchModel {
     /**
      * SearchModel constructor.
      * @param TokenModel $tokenModel
+     * @param string $eventType
      */
-    public function __construct($tokenModel) {
+    public function __construct($tokenModel,$eventType = null) {
         $this->tokenModel = $tokenModel;
-
-        if ($this->checkReservedWord()) {
-            error_log($this->reservedMessageKey);
-			return;
-        }
+        $this->eventType = $eventType;
 
         $this->setOperation();
         $this->materials = array();
@@ -70,13 +68,11 @@ class SearchModel {
 			if ($words["verb"] == "") {
 				if ($checkNoun) {
 					$this->reservedMessageKey = $key;
-					$this->operation = "reserve";
 					return true;
 				}
 			} else {
 				if ($checkNoun && $checkVerb) {
 					$this->reservedMessageKey = $key;
-					$this->operation = "reserve";
 					return true;
 				}
 			}
@@ -87,14 +83,24 @@ class SearchModel {
     private function setOperation() {
         $tokens = $this->tokenModel->getToken();
 
-        if (count($tokens) == 0) {
-            $this->operation = "join";
+        if (!is_null($this->eventType)) {
+            switch ($this->eventType) {
+                case "join":
+                    $this->operation = "join";
+                    return;
+                case "postback":
+                    $this->operation = "postback";
+                    return;
+            }
+        }
+
+        if ($this->checkReservedWord()) {
+            $this->operation = "reserve";
             return;
         }
 
         $reverse = array_reverse($tokens);
         foreach ($reverse as $token) {
-
             error_log(print_r($token,true));
             //operation Search
             foreach (DicConstant::getSearchWords() as $word) {
@@ -108,6 +114,7 @@ class SearchModel {
                 }
             }
         }
+
         $this->operation = "none";
         return;
     }

@@ -42,18 +42,15 @@ $app->post('/callback', function (Request $request) use ($app) {
     $text = $body["events"][0]["message"]["text"];
 
     $tokenModel = new TokenModel($text);
-    $searchModel = new SearchModel($tokenModel);
+    $searchModel = new SearchModel($tokenModel,$eventType);
     $messageModel = new MessageModel($searchModel);
 
     error_log("eventType ".$eventType);
     error_log("replyToken ".$replyToken);
     error_log("text ".$text);
     error_log(print_r($messageModel->getMessage(),true));
-    if ($eventType == "join") {
-        $lineClient->send($replyToken,$messageModel->getMessage());
-    } else {
-        $lineClient->send($replyToken,$messageModel->getMessage());
-    }
+
+    $lineClient->send($replyToken,$messageModel->getMessage());
 
     return 'OK';
 });
