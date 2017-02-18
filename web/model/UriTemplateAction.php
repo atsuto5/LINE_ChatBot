@@ -6,8 +6,8 @@ require_once ('./model/TemplateActionInterface.php');
  * Date: 2017/02/18
  * Time: 13:48
  */
-class UrlTemplateAction implements TemplateActionInterface {
-    private $type = "url";
+class UriTemplateAction implements TemplateActionInterface {
+    private $type = "uri";
     private $label;
     private $uri;
 
