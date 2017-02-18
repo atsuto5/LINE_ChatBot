@@ -61,7 +61,6 @@ class MessageModel {
 
 		if ($result) {
             $message = <<<EOT
-色　　　：{$result["color"]}
 カテゴリ：{$result["category"]}
 採取地　：{$result["price"]}
 EOT;
