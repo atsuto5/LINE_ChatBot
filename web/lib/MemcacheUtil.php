@@ -34,11 +34,18 @@ class MemcacheUtil {
     }
 
     /**
+     * @param string $key
+     * @param array|bool|float|int|mixed|string $value
+     */
+    public function set($key,$value) {
+        $this->memcache->set($key,$value);
+    }
+
+    /**
      * @param $key
      * @return array|bool|float|int|mixed|string
      */
     public function get($key) {
         return $this->memcache->get($key);
     }
-
 }
