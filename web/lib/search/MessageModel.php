@@ -173,7 +173,7 @@ EOT;
         $message .= "色　　　：".$detail["color"]."\n";
         $message .= "カテゴリ：".$detail["category"]."\n";
         $message .= "価格　　：".$detail["price"]."\n";
-        $message .= "店　　　：".$detail["shop"];
+        $message .= "店　　　：".$detail["shop"]."\n";
         $message .= "ーーーーーーー\n";
         $message .= "採取地　：".$detail["place"]."\n";
         $message .= "ドロップ：".$detail["monster"]."\n";
