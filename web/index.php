@@ -31,6 +31,14 @@ $app->get('/', function() use($app) {
   return $app['twig']->render('index.twig');
 });
 
+$app->post('/uri_action_callback', function (Request $request) use ($app) {
+    error_log($request->getContent());
+});
+
+$app->get('/uri_action_callback', function (Request $request) use ($app) {
+    error_log($request->getContent());
+});
+
 $app->post('/callback', function (Request $request) use ($app) {
 
     $lineClient = new LineClient();
