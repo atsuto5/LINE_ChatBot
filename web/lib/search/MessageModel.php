@@ -177,7 +177,7 @@ EOT;
         $message .= "ーーーーーーー\n";
         $message .= "採取地　：".$detail["place"]."\n";
         $message .= "ドロップ：".$detail["monster"]."\n";
-        $message .= "ーーーーーーー\n";
+        $message .= "ーーーーーーー";
         $this->messageArray[] = LineMessageUtil::getTextMessage($message);
     }
 
