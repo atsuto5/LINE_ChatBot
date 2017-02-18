@@ -131,7 +131,7 @@ class SearchModel {
      */
     public function getOperation()
     {
-        return DicConstant::getMaterialWords();//$this->operation;
+        return $this->operation;
     }
 
     /**
@@ -139,7 +139,7 @@ class SearchModel {
      */
     public function getMaterials()
     {
-        return $this->materials;
+        return DicConstant::getMaterialWords();//$this->materials;
     }
 
 	/**
