@@ -62,7 +62,6 @@ class MessageModel {
 		if ($result) {
             $message = <<<EOT
 カテゴリ：{$result["category"]}
-採取地　：{$result["place"]}
 EOT;
 		    $buttonTemplate = new LineButtonTemplate();
 		    $buttonTemplate->setThumbnailImageUrl($result["image_url"]);
