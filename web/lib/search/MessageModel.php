@@ -116,6 +116,8 @@ EOT;
             $columnTemplate->addAction($postBackAction);
             $carouselTemplate->addColumn($columnTemplate);
 		}
+
+		error_log(print_r($carouselTemplate,true));
         $this->messageArray[] = LineMessageUtil::getTemplateMessage("tes",$carouselTemplate);
     }
 
