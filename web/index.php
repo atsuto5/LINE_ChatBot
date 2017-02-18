@@ -51,6 +51,7 @@ $app->post('/callback', function (Request $request) use ($app) {
     error_log("replyToken ".$replyToken);
     error_log("text ".$text);
     error_log(print_r($messageModel->getMessage(),true));
+    error_log($memcacheUtil->get("wakeUp"));
 
     if($memcacheUtil->get("wakeUp")) {
         if ($messageModel->isResponseMessage()) {
