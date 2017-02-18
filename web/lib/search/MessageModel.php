@@ -60,24 +60,22 @@ class MessageModel {
 		error_log(print_r($result,true));
 
 		if ($result) {
+            $message = <<<EOT
+色　　　：{$result["color"]}
+カテゴリ：{$result["category"]}
+採取地　：{$result["price"]}
+EOT;
 		    $buttonTemplate = new LineButtonTemplate();
 		    $buttonTemplate->setThumbnailImageUrl($result["image_url"]);
 		    $buttonTemplate->setTitle($result["name"]);
+		    $buttonTemplate->setText($message);
 
 		    $postBackAction = new PostBackTemplateAction();
 		    $postBackAction->setLabel("もっと詳しく");
             $postBackAction->setData("data");
 
             $buttonTemplate->addAction($postBackAction);
-            $this->messageArray[] = LineMessageUtil::getTemplateMessage("tes",$buttonTemplate);
-
-			$message = <<<EOT
-レベル　：{$result["level"]}
-色　　　：{$result["color"]}
-価格　　：{$result["price"]}
-カテゴリ：{$result["category"]}
-採取地　：{$result["price"]}
-EOT;
+            $this->messageArray[] = LineMessageUtil::getTemplateMessage($result["name"],$buttonTemplate);
 		} else {
 			$this->messageArray[] = LineMessageUtil::getTextMessage("ごめん。わからなかった...");
 		}
