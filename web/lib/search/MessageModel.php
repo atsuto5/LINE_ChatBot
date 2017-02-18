@@ -37,11 +37,14 @@ class MessageModel {
             case SEARCH:
                 $materials = $this->searchModel->getMaterials();
                 if (count($materials) == 0) {
-                    $this->setNoneMessage();
+                    $similarMaterials = $this->searchModel->getSimilarMaterials();
+                    if (count($similarMaterials) == 0) {
+                        $this->setNoneMessage();
+                    } else {
+                        $this->setMultiMaterialMessage();
+                    }
                 } else if (count($materials) == 1) {
                     $this->setSingleMaterialMessage();
-                } else {
-                    $this->setMultiMaterialMessage();
                 }
                 break;
             case JOIN:

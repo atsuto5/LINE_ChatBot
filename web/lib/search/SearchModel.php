@@ -14,9 +14,11 @@ class SearchModel {
 
     private $operation;
     private $materials;
+    private $similarMaterials;
     private $eventType;
     private $searchLimit = 80;
     private $materialLimit = 60;
+    private $similarMaterialLimit = 30;
     private $reservedLimit = 0.7;
     private $reservedMessageKey = false;
     /**
@@ -30,6 +32,7 @@ class SearchModel {
 
         $this->setOperation();
         $this->materials = array();
+        $this->similerMaterials = array();
 
         error_log($this->operation);
         if ($this->operation == NONE) {
@@ -81,15 +84,21 @@ class SearchModel {
     }
 
     private function setMaterial() {
+        $maxSimilar = 0;
 		foreach (DicConstant::getMaterialWords() as $word) {
-			$result = 0;
+			$similarity = 0;
 			$nounsText = $this->tokenModel->getInVerbsText();
-			similar_text($nounsText,$word,$result);
+			similar_text($nounsText,$word,$similarity);
 
-			error_log($nounsText."と".$word."の類似度は".$result);
+			error_log($nounsText."と".$word."の類似度は".$similarity);
 
-			if ($result > $this->materialLimit) {
-				$this->materials[] =$word;
+			if ($this->similerMaterials < $similarity && $similarity < $this->materialLimit) {
+			    $this->similerMaterials[] = $word;
+            }
+
+			if ($similarity > $this->materialLimit && $similarity > $maxSimilar) {
+				$this->materials = array($word);
+				$maxSimilar = $similarity;
 			}
 		}
     }
@@ -150,6 +159,16 @@ class SearchModel {
     {
         return $this->materials;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSimilarMaterials()
+    {
+        return $this->similarMaterials;
+    }
+
+
 
 	/**
 	 * @return string
