@@ -93,7 +93,8 @@ class SearchModel {
 			error_log($nounsText."と".$word."の類似度は".$similarity);
 
 			if ($this->similarMaterialLimit < $similarity && $similarity < $this->materialLimit) {
-			    $this->similerMaterials[] = $word;
+                error_log("similarに　".$word."　を追加した");
+			    $this->similarMaterials[] = $word;
             }
 
 			if ($similarity > $this->materialLimit && $similarity > $maxSimilar) {
