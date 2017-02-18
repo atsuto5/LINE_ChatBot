@@ -151,7 +151,7 @@ EOT;
     }
 
     private function setSearchDetailMessage() {
-        error_log(print_r($this->searchModel->getMaterials(),true);
+        error_log(print_r($this->searchModel->getMaterials(),true));
 
         //$this->messageArray[] = LineMessageUtil::getTextMessage($message);
     }
