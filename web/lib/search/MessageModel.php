@@ -50,15 +50,23 @@ class MessageModel {
 
     private function setSingleMaterialMessage() {
 		$targetMaterial = $this->searchModel->getMaterials()[0];
-        $this->messageArray[] = LineMessageUtil::getTextMessage($targetMaterial."を探してくるよ！！");
 
 		error_log(print_r($this->materialDetail,true));
-
 		$result = $this->materialDetail[$targetMaterial];
 		error_log(print_r($result,true));
 
 		if ($result) {
-			$this->messageArray[] = LineMessageUtil::getImageMessage($result["image_url"],$result["image_url"]);
+		    $buttonTemplate = new LineButtonTemplate();
+		    $buttonTemplate->setThumbnailImageUrl($result["image_url"]);
+		    $buttonTemplate->setTitle($result["name"]);
+
+		    $postBackAction = new PostBackTemplateAction();
+		    $postBackAction->setLabel("もっと詳しく");
+            $postBackAction->setData("show_detail");
+
+            $buttonTemplate->addAction($postBackAction);
+            $this->messageArray[] = LineMessageUtil::getTemplateMessage("tes",$buttonTemplate);
+
 			$message = <<<EOT
 レベル　：{$result["level"]}
 色　　　：{$result["color"]}
@@ -66,8 +74,6 @@ class MessageModel {
 カテゴリ：{$result["category"]}
 採取地　：{$result["price"]}
 EOT;
-			$this->messageArray[] = LineMessageUtil::getTextMessage($message);
-
 		} else {
 			$this->messageArray[] = LineMessageUtil::getTextMessage("ごめん。わからなかった...");
 		}

@@ -64,10 +64,14 @@ class LineMessageUtil {
     /**
      * @param $altText
      * @param TemplateInterface $template
+     * @return array
      */
     public static function getTemplateMessage($altText,$template) {
-        $template->getTemplateObject();
-
+        return array (
+            "type" => "template",
+            "altText" => $altText,
+            "template" => $template->getTemplateObject()
+        );
     }
 
 
