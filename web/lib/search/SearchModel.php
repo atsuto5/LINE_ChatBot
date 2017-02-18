@@ -102,10 +102,10 @@ class SearchModel {
             case "2" :
                 break;
             case "3" :
-                $this->memcacheUtil->add("wakeUp",true);
+                $this->memcacheUtil->add("wakeUp",1);
                 break;
             case "4" :
-                $this->memcacheUtil->add("wakeUp",false);
+                $this->memcacheUtil->add("wakeUp",0);
                 break;
         }
     }
