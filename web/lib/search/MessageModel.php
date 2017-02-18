@@ -71,6 +71,7 @@ EOT;
 		    $postBackAction = new PostBackTemplateAction();
 		    $postBackAction->setLabel("もっと詳しく");
             $postBackAction->setData($result["name"]);
+            $postBackAction->setText($result["name"]."をもっと詳しく教えて");
 
             $buttonTemplate->addAction($postBackAction);
             $this->messageArray[] = LineMessageUtil::getTemplateMessage($result["name"],$buttonTemplate);
@@ -90,7 +91,6 @@ EOT;
             $columnTemplate = new CarouselColumnTemplate();
             $columnTemplate->setThumbnailImageUrl($detail["image_url"]);
             $columnTemplate->setTitle($detail["name"]);
-            $columnTemplate->setText($detail["name"]."をもっと詳しく教えて");
 
             $postBackAction = new PostBackTemplateAction();
             $postBackAction->setLabel("もっと詳しく");
