@@ -151,9 +151,19 @@ EOT;
     }
 
     private function setSearchDetailMessage() {
-        error_log(print_r($this->searchModel->getMaterials(),true));
+        $targetMaterial = $this->searchModel->getMaterials()[0];
+        $detail = $this->materialDetail[$targetMaterial];
 
-        //$this->messageArray[] = LineMessageUtil::getTextMessage($message);
+        $message  = $detail["name"]."の詳細だよ！！\n";
+        $message .= "名前　　：".$detail["name"]."\n";
+        $message .= "レベル　：".$detail["level"]."\n";
+        $message .= "色　　　：".$detail["color"]."\n";
+        $message .= "価格　　：".$detail["price"]."\n";
+        $message .= "カテゴリ：".$detail["category"]."\n";
+        $message .= "採取地　：".$detail["place"]."\n";
+        $message .= "ドロップ：".$detail["monster"]."\n";
+        $message .= "店　　　：".$detail["shop"];
+        $this->messageArray[] = LineMessageUtil::getTextMessage($message);
     }
 
     private function setNoneMessage() {
