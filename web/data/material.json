@@ -14,7 +14,7 @@
     "color" : "青",
     "price" : "4",
     "category" : "（植物類）15,（水）5",
-    "image_url": "https://shrouded-badlands-61521.herokuapp.com/images/magic_leaf.png",
+    "image_url": "https://shrouded-badlands-61521.herokuapp.com/images/cobalt_leaf.png",
     "place" : "巡礼街道、彩花の園、青葉の丘、せせらぎの忘れ物、地底湖",
     "monster": "ホワイトルート、アルラウネ、キンモクジュ",
     "shop" : ""
@@ -34,7 +34,7 @@
     "color" : "青",
     "price" : "1",
     "category" : "（植物類）10,（毒の材料）10",
-    "image_url": "https://shrouded-badlands-61521.herokuapp.com/images/magic_leaf.png",
+    "image_url": "https://shrouded-badlands-61521.herokuapp.com/images/fea_leaf.png",
     "place" : "獣たちの寄合所、境界の裾野、困惑の迷い路、常霧の樹海、古き妖精の森、封印された寺院",
     "monster": "ホワイトルート、アルラウネ、死告花の精、大星魚、タイラントホルン",
     "shop" : ""
