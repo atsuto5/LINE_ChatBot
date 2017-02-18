@@ -66,9 +66,9 @@ $app->post('/callback', function (Request $request) use ($app) {
     $m->setSaslAuthData( getenv("MEMCACHIER_USERNAME")
         , getenv("MEMCACHIER_PASSWORD") );
 
+    error_log($m->get("foo"));
     // Test client
     $m->add("foo", "bar");
-    echo $m->get("foo");
 
     return 'OK';
 });
