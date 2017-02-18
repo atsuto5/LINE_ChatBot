@@ -18,7 +18,7 @@ class SearchModel {
     private $eventType;
     private $searchLimit = 80;
     private $materialLimit = 60;
-    private $similarMaterialLimit = 30;
+    private $similarMaterialLimit = 20;
     private $reservedLimit = 0.7;
     private $reservedMessageKey = false;
     /**
@@ -92,7 +92,7 @@ class SearchModel {
 
 			error_log($nounsText."と".$word."の類似度は".$similarity);
 
-			if ($this->similerMaterials < $similarity && $similarity < $this->materialLimit) {
+			if ($this->similarMaterialLimit < $similarity && $similarity < $this->materialLimit) {
 			    $this->similerMaterials[] = $word;
             }
 
