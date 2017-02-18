@@ -155,14 +155,17 @@ EOT;
         $detail = $this->materialDetail[$targetMaterial];
 
         $message  = $detail["name"]."の詳細だよ！！\n";
+        $message  = "ーーーーーーー\n";
         $message .= "名前　　：".$detail["name"]."\n";
         $message .= "レベル　：".$detail["level"]."\n";
         $message .= "色　　　：".$detail["color"]."\n";
-        $message .= "価格　　：".$detail["price"]."\n";
         $message .= "カテゴリ：".$detail["category"]."\n";
+        $message .= "価格　　：".$detail["price"]."\n";
+        $message .= "店　　　：".$detail["shop"];
+        $message  = "ーーーーーーー\n";
         $message .= "採取地　：".$detail["place"]."\n";
         $message .= "ドロップ：".$detail["monster"]."\n";
-        $message .= "店　　　：".$detail["shop"];
+        $message  = "ーーーーーーー\n";
         $this->messageArray[] = LineMessageUtil::getTextMessage($message);
     }
 
