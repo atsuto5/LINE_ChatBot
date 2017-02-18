@@ -36,8 +36,11 @@ class MessageModel {
                 break;
             case SEARCH:
                 $materials = $this->searchModel->getMaterials();
+                error_log("materials");
+                error_log(print_r($materials,true));
                 if (count($materials) == 0) {
                     $similarMaterials = $this->searchModel->getSimilarMaterials();
+                    error_log(print_r($similarMaterials,true));
                     if (count($similarMaterials) == 0) {
                         $this->setNoneMessage();
                     } else {
