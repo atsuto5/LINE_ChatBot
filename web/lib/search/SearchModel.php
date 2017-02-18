@@ -99,6 +99,13 @@ class SearchModel {
             case HELP:
                 break;
             case SEARCH_DETAIL :
+                $originText = $this->tokenModel->getOriginText();
+                $materialName = str_replace(
+                    DicConstant::getReservedWords()[SEARCH_DETAIL][0],
+                    "",
+                    $originText
+                );
+                $this->materials[] = $materialName;
                 break;
             case WAKEUP :
                 break;
