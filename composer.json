@@ -4,7 +4,8 @@
     "monolog/monolog": "^1.4",
     "twig/twig": "^1.8",
     "symfony/twig-bridge": "^2",
-    "linecorp/line-bot-sdk": "^0.1.0"
+    "linecorp/line-bot-sdk": "^0.1.0",
+    "ext-memcached":"*"
   },
   "require-dev": {
     "heroku/heroku-buildpack-php": "*"
