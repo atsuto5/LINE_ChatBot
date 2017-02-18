@@ -1,4 +1,5 @@
 <?php
+require_once ('./model/TemplateActionInterface.php');
 /**
  * Created by IntelliJ IDEA.
  * User: haradakazumi

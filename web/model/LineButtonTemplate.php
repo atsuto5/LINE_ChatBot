@@ -1,4 +1,5 @@
 <?php
+require_once ('./model/TemplateInterface.php');
 /**
  * Created by IntelliJ IDEA.
  * User: haradakazumi
