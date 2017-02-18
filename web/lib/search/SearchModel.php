@@ -17,7 +17,7 @@ class SearchModel {
     private $eventType;
     private $searchLimit = 80;
     private $materialLimit = 60;
-    private $reservedLimit = 8.0;
+    private $reservedLimit = 0.7;
     private $reservedMessageKey = false;
     /**
      * SearchModel constructor.
@@ -42,10 +42,20 @@ class SearchModel {
     private function checkReservedWord() {
 
 		foreach (DicConstant::getReservedWords() as $key => $words) {
-
 		    foreach ($words as $word) {
                 $sim = self::levenshteinNormalizedUtf8($this->tokenModel->getOriginText(),$word);
                 error_log($this->tokenModel->getOriginText()."と".$word."のレーベンシュタイン距離：".$sim);
+
+                if ($sim > $this->reservedLimit) {
+                    $this->reservedMessageKey = $key;
+                    return true;
+                }
+
+                //文字列が含まれている場合も予約語判定する。
+                if (mb_strpos($this->tokenModel->getOriginText(),$word, 0, "UTF-8") !== false) {
+                    $this->reservedMessageKey = $key;
+                    return true;
+                }
             }
 		}
 		return false;
