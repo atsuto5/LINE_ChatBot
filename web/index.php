@@ -41,6 +41,11 @@ $app->post('/callback', function (Request $request) use ($app) {
     $replyToken = $body["events"][0]["replyToken"];
     $text = $body["events"][0]["message"]["text"];
 
+    //callbackのdefaultTextは表示しない。
+    if($text == "default") {
+        return 'OK';
+    }
+
     $tokenModel = new TokenModel($text);
     $searchModel = new SearchModel($tokenModel);
     $messageModel = new MessageModel($searchModel);

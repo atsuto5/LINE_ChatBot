@@ -70,7 +70,7 @@ EOT;
 
 		    $postBackAction = new PostBackTemplateAction();
 		    $postBackAction->setLabel("もっと詳しく");
-            $postBackAction->setData("data");
+            $postBackAction->setData($result["name"]);
 
             $buttonTemplate->addAction($postBackAction);
             $this->messageArray[] = LineMessageUtil::getTemplateMessage($result["name"],$buttonTemplate);
