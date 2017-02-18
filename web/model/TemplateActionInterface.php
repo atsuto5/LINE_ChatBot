@@ -6,5 +6,9 @@
  * Time: 20:55
  */
 interface TemplateActionInterface {
+
+    /**
+     * @return array
+     */
     public function getAction();
 }

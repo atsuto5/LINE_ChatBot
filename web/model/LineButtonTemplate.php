@@ -17,12 +17,80 @@ class LineButtonTemplate implements TemplateInterface {
         $this->thumbnailImageUrl = "";
         $this->title = "";
         $this->text = "";
-        $this->actions = "";
+        $this->actions = array();
     }
 
+    /**
+     * @return string
+     */
+    public function getThumbnailImageUrl()
+    {
+        return $this->thumbnailImageUrl;
+    }
+
+    /**
+     * @param string $thumbnailImageUrl
+     */
+    public function setThumbnailImageUrl($thumbnailImageUrl)
+    {
+        $this->thumbnailImageUrl = $thumbnailImageUrl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * @param string $text
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+    }
+
+    /**
+     * @return array
+     */
+    public function getActions()
+    {
+        return $this->actions;
+    }
+
+    /**
+     * @param TemplateActionInterface $actions
+     */
+    public function addAction(TemplateActionInterface $actions)
+    {
+        $this->actions[] = $actions;
+    }
 
     public function getTemplateObject() {
-
-
+        return array(
+            "type" => $this->type,
+            "thumbnailImageUrl" => $this->thumbnailImageUrl,
+            "title" => $this->title,
+            "text" => $this->text,
+            "actions" => $this->actions
+        );
     }
 }

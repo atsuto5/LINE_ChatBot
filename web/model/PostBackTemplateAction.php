@@ -66,8 +66,16 @@ class PostBackTemplateAction implements TemplateActionInterface {
     }
 
 
+    /**
+     * @return array
+     */
     public function getAction()
     {
-        // TODO: Implement getAction() method.
+        return array(
+            "type" => $this->type,
+            "label" => $this->label,
+            "data" => $this->data,
+            "text" => $this->text
+        );
     }
 }
