@@ -132,18 +132,18 @@ EOT;
 
             $detailAction = new PostBackTemplateAction();
             $detailAction->setLabel("もっと詳しく");
-            $detailAction->setData($result["name"]);
-            $detailAction->setText($result["name"]."をもっと詳しく教えて");
+            $detailAction->setData($detail["name"]);
+            $detailAction->setText($detail["name"]."をもっと詳しく教えて");
 
             $commentReadAction = new PostBackTemplateAction();
             $commentReadAction->setLabel("コメントをみる（".$count."件）");
-            $commentReadAction->setData($result["name"]);
-            $commentReadAction->setText($result["name"]."のコメントをみる");
+            $commentReadAction->setData($detail["name"]);
+            $commentReadAction->setText($detail["name"]."のコメントをみる");
 
             $commentWriteAction = new PostBackTemplateAction();
             $commentWriteAction->setLabel("コメントを書く");
-            $commentWriteAction->setData($result["name"]);
-            $commentWriteAction->setText($result["name"]."のコメントを書く");
+            $commentWriteAction->setData($detail["name"]);
+            $commentWriteAction->setText($detail["name"]."のコメントを書く");
 
             $columnTemplate->addAction($commentWriteAction);
             $columnTemplate->addAction($commentReadAction);
