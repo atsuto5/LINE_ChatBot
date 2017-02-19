@@ -217,6 +217,11 @@ EOT;
     }
 
     private function setReadCommentMessage() {
+        $mongoUtil = new MongoUtil();
+        $result = $mongoUtil->findComment($this->searchModel->getMaterials()[0]);
+
+        error_log(print_r($result,true));
+
         $this->messageArray[] = LineMessageUtil::getTextMessage("コメント読んでね");
     }
 
