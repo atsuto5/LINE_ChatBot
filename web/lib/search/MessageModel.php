@@ -98,7 +98,7 @@ EOT;
             $commentWriteAction->setData($result["name"]);
             $commentWriteAction->setText($result["name"]."のコメントを書く");
 
-            $buttonTemplate->addAction($postBackAction);
+            $buttonTemplate->addAction($detailAction);
             $buttonTemplate->addAction($commentReadAction);
             $buttonTemplate->addAction($commentWriteAction);
             $this->messageArray[] = LineMessageUtil::getTemplateMessage($result["name"],$buttonTemplate);
