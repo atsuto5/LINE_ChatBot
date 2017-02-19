@@ -76,7 +76,7 @@ $app->post('/callback', function (Request $request) use ($app) {
             foreach ($messages as $message) {
                 $comment .= $message."\n";
                 if (end($messages) !== $message) {
-                    $comment .= "ーーーーーー\n";
+                    $comment .= "ーーーーーーー\n";
                 }
             }
             $mongoUtil->insertComment($lineRequestModel->getRoomKey(),$key,$comment);
