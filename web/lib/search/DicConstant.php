@@ -25,13 +25,8 @@ class DicConstant {
     }
 
     public static function getMaterialWords() {
-        return array (
-            "魔法の草",
-            "コバルト草",
-            "妖精の土だんご",
-            "妖精の毒草",
-            "ミスティックハーブ"
-        );
+        $details = json_decode(file_get_contents("./data/material.json"),true);
+        return array_keys($details);
     }
 
 	public static function getPlaceWords() {
