@@ -116,9 +116,11 @@ EOT;
 
     private function setMultiMaterialMessage() {
 
+        $mongoUtil = new MongoUtil();
         $carouselTemplate = new LineCarouselTemplate();
 		foreach ($this->searchModel->getSimilarMaterials() as $material) {
             $detail = $this->materialDetail[$material];
+            $count = $mongoUtil->countComment($material);
 
             $message = <<<EOT
 カテゴリ：{$detail["category"]}
@@ -128,12 +130,25 @@ EOT;
             $columnTemplate->setTitle($detail["name"]);
             $columnTemplate->setText($message);
 
-            $postBackAction = new PostBackTemplateAction();
-            $postBackAction->setLabel("もっと詳しく");
-            $postBackAction->setData($detail["name"]);
-            $postBackAction->setText($detail["name"]."をもっと詳しく教えて");
+            $detailAction = new PostBackTemplateAction();
+            $detailAction->setLabel("もっと詳しく");
+            $detailAction->setData($result["name"]);
+            $detailAction->setText($result["name"]."をもっと詳しく教えて");
 
-            $columnTemplate->addAction($postBackAction);
+            $commentReadAction = new PostBackTemplateAction();
+            $commentReadAction->setLabel("コメントをみる（".$count."件）");
+            $commentReadAction->setData($result["name"]);
+            $commentReadAction->setText($result["name"]."のコメントをみる");
+
+            $commentWriteAction = new PostBackTemplateAction();
+            $commentWriteAction->setLabel("コメントを書く");
+            $commentWriteAction->setData($result["name"]);
+            $commentWriteAction->setText($result["name"]."のコメントを書く");
+
+            $buttonTemplate->addAction($commentWriteAction);
+            $buttonTemplate->addAction($commentReadAction);
+            $buttonTemplate->addAction($detailAction);
+
             $carouselTemplate->addColumn($columnTemplate);
 		}
 
