@@ -36,8 +36,6 @@ class MessageModel {
                 break;
             case SEARCH:
                 $materials = $this->searchModel->getMaterials();
-                error_log("materials");
-                error_log(print_r($materials,true));
                 if (count($materials) == 0) {
                     $similarMaterials = $this->searchModel->getSimilarMaterials();
                     error_log(print_r($similarMaterials,true));
@@ -89,6 +87,16 @@ EOT;
 		    $postBackAction->setLabel("もっと詳しく");
             $postBackAction->setData($result["name"]);
             $postBackAction->setText($result["name"]."をもっと詳しく教えて");
+
+            $postBackAction = new PostBackTemplateAction();
+            $postBackAction->setLabel("コメントをみる");
+            $postBackAction->setData($result["name"]);
+            $postBackAction->setText($result["name"]."のコメントをみる");
+
+            $postBackAction = new PostBackTemplateAction();
+            $postBackAction->setLabel("コメントを書く");
+            $postBackAction->setData($result["name"]);
+            $postBackAction->setText($result["name"]."のコメントを書く");
 
             $buttonTemplate->addAction($postBackAction);
             $this->messageArray[] = LineMessageUtil::getTemplateMessage($result["name"],$buttonTemplate);
