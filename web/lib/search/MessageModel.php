@@ -220,12 +220,11 @@ EOT;
         $mongoUtil = new MongoUtil();
         $cursor = $mongoUtil->findComment($this->searchModel->getMaterials()[0]);
         foreach ($cursor as $item) {
-            error_log($item["userId"]);
+            $message = $item["comment"]."\n";
+            $message .= date("Y-m-d H:i:s",$time["create_time"]);
+
+            $this->messageArray[] = LineMessageUtil::getTextMessage($message);
         }
-
-        error_log(print_r($result,true));
-
-        $this->messageArray[] = LineMessageUtil::getTextMessage("コメント読んでね");
     }
 
     private function setWriteCommentMessage() {
