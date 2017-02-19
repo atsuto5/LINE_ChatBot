@@ -79,6 +79,9 @@ class MessageModel {
             $message = <<<EOT
 カテゴリ：{$result["category"]}
 EOT;
+            $mongoUtil = new MongoUtil();
+            $count = $mongoUtil->countComment($this->searchModel->getMaterials()[0]);
+
 		    $buttonTemplate = new LineButtonTemplate();
 		    $buttonTemplate->setThumbnailImageUrl($result["image_url"]);
 		    $buttonTemplate->setTitle($result["name"]);
@@ -90,7 +93,7 @@ EOT;
             $detailAction->setText($result["name"]."をもっと詳しく教えて");
 
             $commentReadAction = new PostBackTemplateAction();
-            $commentReadAction->setLabel("コメントをみる");
+            $commentReadAction->setLabel("コメントをみる（".$count."件）");
             $commentReadAction->setData($result["name"]);
             $commentReadAction->setText($result["name"]."のコメントをみる");
 
