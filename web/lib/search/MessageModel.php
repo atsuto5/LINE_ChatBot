@@ -99,9 +99,10 @@ EOT;
             $commentWriteAction->setData($result["name"]);
             $commentWriteAction->setText($result["name"]."のコメントを書く");
 
-            $buttonTemplate->addAction($detailAction);
-            $buttonTemplate->addAction($commentReadAction);
             $buttonTemplate->addAction($commentWriteAction);
+            $buttonTemplate->addAction($commentReadAction);
+            $buttonTemplate->addAction($detailAction);
+
             $this->messageArray[] = LineMessageUtil::getTemplateMessage($result["name"],$buttonTemplate);
 		} else {
 			$this->messageArray[] = LineMessageUtil::getTextMessage("ごめん。わからなかった...");
