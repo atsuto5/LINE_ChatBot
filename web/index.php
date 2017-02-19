@@ -83,7 +83,6 @@ $app->post('/callback', function (Request $request) use ($app) {
             $memcacheUtil->set("messages",array(),60);
             $memcacheUtil->set("comment_key","",60);
         }
-        return 'OK';
     }
 
     //コメントを書く

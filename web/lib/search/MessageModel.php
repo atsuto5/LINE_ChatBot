@@ -176,6 +176,9 @@ EOT;
             case WRITE_COMMENT:
                 $this->setWriteCommentMessage();
                 break;
+            case WRITE_COMPLETE_COMMENT:
+                $this->setWriteCompleteCommentMessage();
+                break;
         }
     }
 
@@ -253,6 +256,13 @@ EOT;
         $message = $detail["name"]."のコメント書いてね\n";
         $message .= "今から１分以内にメッセージを書いて、最後に「完了」って入力すると登録できるよ！\n";
         $message .= "ではでは、スタート！";
+
+        $this->messageArray[] = LineMessageUtil::getTextMessage($message);
+    }
+
+    private function setWriteCompleteCommentMessage() {
+
+        $message = "登録したよ！";
 
         $this->messageArray[] = LineMessageUtil::getTextMessage($message);
     }
