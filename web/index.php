@@ -39,18 +39,12 @@ $app->post('/callback', function (Request $request) use ($app) {
     $lineRequestModel = new LineRequestModel($request);
 
     $mongoClient = new Client(getenv("MONGODB_URI"));
-    $collenction = $mongoClient->selectCollection("heroku_917cpv07","material_comment");
-
-    error_log(print_r($collenction,true));
-    /*$database->createCollection("material_comment");
-    $collection = $database->selectCollection("material_comment");
+    $collection = $mongoClient->selectCollection("heroku_917cpv07","material_comment");
     $insertOneResult = $collection->insertOne([
         'userId' => 'admin',
         'comment' => 'test',
         'create_time' => strtotime("now"),
-    ]);*/
-
-
+    ]);
 
     $memcacheUtil = new MemcacheUtil($lineRequestModel->getRoomKey());
 
