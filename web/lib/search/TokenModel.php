@@ -87,9 +87,16 @@ class TokenModel {
 		$result = array();
 
 		foreach ($this->getToken() as $token) {
+		    if (preg_match("/助動詞|感動詞/",$token->feature)) {
+                $result[] = $token;
+		        continue;
+            }
+
 			if (mb_strpos($token->feature,"動詞", 0, "UTF-8") === false) {
 				$result[] = $token;
-			}
+			} else {
+		        break;
+            }
 		}
 		return $result;
 	}
