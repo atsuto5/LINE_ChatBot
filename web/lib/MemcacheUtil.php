@@ -38,9 +38,10 @@ class MemcacheUtil {
     /**
      * @param string $key
      * @param array|bool|float|int|mixed|string $value
+     * @param int $expire
      */
-    public function set($key,$value) {
-        $this->memcache->set($this->roomKey."_".$key,$value);
+    public function set($key,$value,$expire = 0) {
+        $this->memcache->set($this->roomKey."_".$key,$value,$expire);
     }
 
     /**

@@ -66,6 +66,7 @@ class DicConstant {
             ),
             READ_COMMENT => array("のコメントをみる"),
             WRITE_COMMENT => array("のコメントを書く"),
+            WRITE_COMPLETE_COMMENT => array("完了"),
         );
     }
 

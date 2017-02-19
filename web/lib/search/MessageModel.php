@@ -11,6 +11,7 @@ require_once ('./model/LineButtonTemplate.php');
 require_once ('./model/LineCarouselTemplate.php');
 require_once ('./model/CarouselColumnTemplate.php');
 require_once ('./model/PostBackTemplateAction.php');
+require_once ('./lib/MongoUtil.php');
 
 class MessageModel {
 
@@ -220,7 +221,14 @@ EOT;
     }
 
     private function setWriteCommentMessage() {
-        $this->messageArray[] = LineMessageUtil::getTextMessage("コメント書いてね");
+        $targetMaterial = $this->searchModel->getMaterials()[0];
+        $detail = $this->materialDetail[$targetMaterial];
+
+        $message = $detail["name"]."のコメント書いてね\n";
+        $message = "ここから１分以内にメッセージを書いて、最後に「完了」って入力すると登録できるよ！\n";
+        $message = "ではでは、スタート！\n";
+
+        $this->messageArray[] = LineMessageUtil::getTextMessage($message);
     }
 
     private function setJoinedMessage() {

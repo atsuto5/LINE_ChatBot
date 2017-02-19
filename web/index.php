@@ -52,6 +52,34 @@ $app->post('/callback', function (Request $request) use ($app) {
         return 'OK';
     }
 
+    //コメントを保存する
+    if ($memcacheUtil->get("comment")) {
+        error_log("コメントを保存します");
+        $messages = $memcacheUtil->get("messages");
+        if ($messages) {
+            $messages[] = $lineRequestModel->getText();
+        } else {
+            $messages = array();
+            $messages[] = $lineRequestModel->getText();
+        }
+
+        error_log(print_r($messages,true));
+        $memcacheUtil->set("messages",$messages,60);
+
+        //コメントを保存する
+        if ($searchModel->getReservedMessageKey() == WRITE_COMPLETE_COMMENT) {
+            $memcacheUtil->set("comment", false);
+        }
+        return 'OK';
+    }
+
+    //コメントを書く
+    if ($searchModel->getReservedMessageKey() == WRITE_COMMENT) {
+        error_log("コメントを書きます。".$searchModel->getMaterials()[0]);
+        $memcacheUtil->set("comment",true, 60);
+        $memcacheUtil->set("comment_key",$searchModel->getMaterials()[0], 60);
+    }
+
     if ($searchModel->getReservedMessageKey() == WAKEUP) {
         $memcacheUtil->set("wakeUp",true);
     }

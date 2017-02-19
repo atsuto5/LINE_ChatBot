@@ -16,4 +16,32 @@ class MongoUtil {
         $this->commentCollection = $this->client->selectCollection("heroku_917cpv07","comment");
     }
 
+    public function insertComment($userId,$key,$comment) {
+        $this->commentCollection->insertOne(
+            array (
+                "userId" => $userId,
+                "key" => $key,
+                "comment" => $comment,
+                "create_time" => strtotime("now")
+            )
+        );
+    }
+
+    public function countComment($key) {
+        return $this->commentCollection->count(array("key" => $key));
+    }
+
+    public function findComment($key,$limit = 3) {
+        $cursor = $this->commentCollection->find(
+            array(
+                "key" => $key
+            ),
+            array(
+                "limit" => $limit,
+                "sort" => array ("create_time" => -1)
+            )
+        );
+        return $cursor->toArray();
+    }
+
 }

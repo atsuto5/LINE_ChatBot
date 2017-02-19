@@ -12,6 +12,7 @@ define("WAKEUP","3");
 define("SLEEP","4");
 define("READ_COMMENT","5");
 define("WRITE_COMMENT","6");
+define("WRITE_COMPLETE_COMMENT","7");
 
 //operation
 define("JOIN","join");
