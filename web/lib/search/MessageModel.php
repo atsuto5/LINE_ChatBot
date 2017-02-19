@@ -218,7 +218,10 @@ EOT;
 
     private function setReadCommentMessage() {
         $mongoUtil = new MongoUtil();
-        $result = $mongoUtil->findComment($this->searchModel->getMaterials()[0]);
+        $cursor = $mongoUtil->findComment($this->searchModel->getMaterials()[0]);
+        foreach ($cursor as $item) {
+            error_log($item["userId"]);
+        }
 
         error_log(print_r($result,true));
 

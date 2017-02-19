@@ -41,7 +41,7 @@ class MongoUtil {
                 "sort" => array ("create_time" => -1)
             )
         );
-        return $cursor->toArray();
+        return $cursor;
     }
 
 }

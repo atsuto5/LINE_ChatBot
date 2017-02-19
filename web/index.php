@@ -80,6 +80,8 @@ $app->post('/callback', function (Request $request) use ($app) {
                 }
             }
             $mongoUtil->insertComment($lineRequestModel->getRoomKey(),$key,$comment);
+            $memcacheUtil->set("messages",array(),60);
+            $memcacheUtil->set("comment_key","",60);
         }
         return 'OK';
     }
