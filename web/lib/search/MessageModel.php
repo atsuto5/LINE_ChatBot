@@ -83,22 +83,24 @@ EOT;
 		    $buttonTemplate->setTitle($result["name"]);
 		    $buttonTemplate->setText($message);
 
-		    $postBackAction = new PostBackTemplateAction();
-		    $postBackAction->setLabel("もっと詳しく");
-            $postBackAction->setData($result["name"]);
-            $postBackAction->setText($result["name"]."をもっと詳しく教えて");
+		    $detailAction = new PostBackTemplateAction();
+            $detailAction->setLabel("もっと詳しく");
+            $detailAction->setData($result["name"]);
+            $detailAction->setText($result["name"]."をもっと詳しく教えて");
 
-            $postBackAction = new PostBackTemplateAction();
-            $postBackAction->setLabel("コメントをみる");
-            $postBackAction->setData($result["name"]);
-            $postBackAction->setText($result["name"]."のコメントをみる");
+            $commentReadAction = new PostBackTemplateAction();
+            $commentReadAction->setLabel("コメントをみる");
+            $commentReadAction->setData($result["name"]);
+            $commentReadAction->setText($result["name"]."のコメントをみる");
 
-            $postBackAction = new PostBackTemplateAction();
-            $postBackAction->setLabel("コメントを書く");
-            $postBackAction->setData($result["name"]);
-            $postBackAction->setText($result["name"]."のコメントを書く");
+            $commentWriteAction = new PostBackTemplateAction();
+            $commentWriteAction->setLabel("コメントを書く");
+            $commentWriteAction->setData($result["name"]);
+            $commentWriteAction->setText($result["name"]."のコメントを書く");
 
             $buttonTemplate->addAction($postBackAction);
+            $buttonTemplate->addAction($commentReadAction);
+            $buttonTemplate->addAction($commentWriteAction);
             $this->messageArray[] = LineMessageUtil::getTemplateMessage($result["name"],$buttonTemplate);
 		} else {
 			$this->messageArray[] = LineMessageUtil::getTextMessage("ごめん。わからなかった...");
