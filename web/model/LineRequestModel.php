@@ -34,6 +34,7 @@ class LineRequestModel {
             $this->roomKey = $body["events"][0]["source"]["groupId"];
         }
 
+        error_log("body      :".$request->getContent());
         error_log("eventType :".$this->eventType);
         error_log("replyToken:".$this->replyToken);
         error_log("text      :".$this->text);
