@@ -21,16 +21,16 @@
     "monster": "ホワイトルート、アルラウネ、キンモクジュ",
     "shop" : ""
   },
-  "妖精の土だんご": {
-    "name" : "妖精の土だんご",
-    "level" : "3",
-    "color" : "黄",
-    "price" : "1",
-    "category" : "（粘土）10,（薬の材料）20",
-    "image_url": "https://shrouded-badlands-61521.herokuapp.com/images/magic_leaf.png",
-    "place" : "恵みの森、メーベルト農場、三つ子橋の泉、山師の水辺、渚の古跡、枯れ木の荒野",
-    "monster": "",
-    "shop" : "コルネリア"
+  "夜水晶": {
+    "name" : "夜水晶",
+    "level" : "29",
+    "color" : "青",
+    "price" : "11",
+    "category" : "（鉱石）35,（宝石）15",
+    "image_url": "https://shrouded-badlands-61521.herokuapp.com/images/night.jpg",
+    "place" : "境界の裾野、堕ちた宮殿、地底湖",
+    "monster": "いきてる魔術書",
+    "shop" : ""
   },
   "妖精の毒草": {
     "name" : "妖精の毒草",
