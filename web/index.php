@@ -39,16 +39,18 @@ $app->post('/callback', function (Request $request) use ($app) {
     $lineRequestModel = new LineRequestModel($request);
 
     $mongoClient = new Client(getenv("MONGODB_URI"));
-    $database = $mongoClient->selectDatabase("comment");
-    $database->createCollection("material_comment");
+    $database = $mongoClient->listDatabases();
+
+    error_log(print_r($database,true));
+    /*$database->createCollection("material_comment");
     $collection = $database->selectCollection("material_comment");
     $insertOneResult = $collection->insertOne([
         'userId' => 'admin',
         'comment' => 'test',
         'create_time' => strtotime("now"),
-    ]);
+    ]);*/
 
-    error_log(print_r($insertOneResult,true));
+
 
     $memcacheUtil = new MemcacheUtil($lineRequestModel->getRoomKey());
 
