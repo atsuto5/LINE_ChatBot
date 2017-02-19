@@ -150,6 +150,12 @@ EOT;
             case SLEEP:
                 $this->setSleepMessage();
                 break;
+            case READ_COMMENT:
+                $this->setReadCommentMessage();
+                break;
+            case WRITE_COMMENT:
+                $this->setWriteCommentMessage();
+                break;
         }
     }
 
@@ -207,6 +213,14 @@ EOT;
         $sleepMessages = DicConstant::getSleepMessages();
         shuffle($sleepMessages);
         $this->messageArray[] = LineMessageUtil::getTextMessage($sleepMessages[0]);
+    }
+
+    private function setReadCommentMessage() {
+        $this->messageArray[] = LineMessageUtil::getTextMessage("コメント読んでね");
+    }
+
+    private function setWriteCommentMessage() {
+        $this->messageArray[] = LineMessageUtil::getTextMessage("コメント書いてね");
     }
 
     private function setJoinedMessage() {

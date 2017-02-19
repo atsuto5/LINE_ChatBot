@@ -121,6 +121,24 @@ class SearchModel {
                 break;
             case SLEEP :
                 break;
+            case READ_COMMENT :
+                $originText = $this->tokenModel->getOriginText();
+                $materialName = str_replace(
+                    DicConstant::getReservedWords()[READ_COMMENT][0],
+                    "",
+                    $originText
+                );
+                $this->materials[] = $materialName;
+                break;
+            case WRITE_COMMENT :
+                $originText = $this->tokenModel->getOriginText();
+                $materialName = str_replace(
+                    DicConstant::getReservedWords()[WRITE_COMMENT][0],
+                    "",
+                    $originText
+                );
+                $this->materials[] = $materialName;
+                break;
         }
     }
 

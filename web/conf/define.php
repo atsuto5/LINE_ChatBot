@@ -9,7 +9,9 @@
 define("HELP","1");
 define("SEARCH_DETAIL","2");
 define("WAKEUP","3");
-define("SLEEP","3");
+define("SLEEP","4");
+define("READ_COMMENT","5");
+define("WRITE_COMMENT","6");
 
 //operation
 define("JOIN","join");

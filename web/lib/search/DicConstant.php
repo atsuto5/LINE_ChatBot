@@ -63,7 +63,9 @@ class DicConstant {
                 "バイバイ",
                 "さようなら",
                 "また明日"
-            )
+            ),
+            READ_COMMENT => array("のコメントをみる"),
+            WRITE_COMMENT => array("のコメントを書く"),
         );
     }
 
