@@ -11,7 +11,8 @@ class DicConstant {
         return array (
             "検索",
             "探す",
-            "探索"
+            "探索",
+            "教えて",
         );
     }
 
