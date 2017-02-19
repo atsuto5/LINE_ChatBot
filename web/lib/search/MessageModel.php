@@ -155,7 +155,7 @@ EOT;
 
         $message .= "\n";
         $message .= "[場所]\n";
-        foreach (DicConstant::getPriceWords() as $word) {
+        foreach (DicConstant::getPlaceWords() as $word) {
             $message .= "{$word}\n";
         }
 

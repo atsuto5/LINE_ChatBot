@@ -9,6 +9,7 @@ require_once ('./lib/MemcacheUtil.php');
 require_once ('./model/LineRequestModel.php');
 
 use Symfony\Component\HttpFoundation\Request;
+use MongoDB\Client;
 
 date_default_timezone_set("Asia/Tokyo");
 
@@ -36,6 +37,9 @@ $app->post('/callback', function (Request $request) use ($app) {
 
     $lineClient = new LineClient();
     $lineRequestModel = new LineRequestModel($request);
+
+    $mongoClient = new Client(getenv("MONGODB_URI"));
+    error_log(print_r($mongoClient,true));
 
     $memcacheUtil = new MemcacheUtil($lineRequestModel->getRoomKey());
 

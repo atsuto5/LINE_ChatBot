@@ -34,7 +34,7 @@ class DicConstant {
         );
     }
 
-	public static function getPriceWords() {
+	public static function getPlaceWords() {
 		return array (
 			"巡礼街道",
 			"彩花の園",
