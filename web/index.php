@@ -6,10 +6,10 @@ require_once ('./lib/search/TokenModel.php');
 require_once ('./lib/search/SearchModel.php');
 require_once ('./lib/search/MessageModel.php');
 require_once ('./lib/MemcacheUtil.php');
+require_once ('./lib/MongoUtil.php');
 require_once ('./model/LineRequestModel.php');
 
 use Symfony\Component\HttpFoundation\Request;
-use MongoDB\Client;
 
 date_default_timezone_set("Asia/Tokyo");
 
@@ -39,6 +39,7 @@ $app->post('/callback', function (Request $request) use ($app) {
     $lineRequestModel = new LineRequestModel($request);
 
     $memcacheUtil = new MemcacheUtil($lineRequestModel->getRoomKey());
+    $mongoUtil = new MongoUtil();
 
     $tokenModel = new TokenModel($lineRequestModel->getText());
     $searchModel = new SearchModel($tokenModel,$lineRequestModel->getEventType());
@@ -55,20 +56,28 @@ $app->post('/callback', function (Request $request) use ($app) {
     //コメントを保存する
     if ($memcacheUtil->get("comment")) {
         error_log("コメントを保存します");
-        $messages = $memcacheUtil->get("messages");
-        if ($messages) {
-            $messages[] = $lineRequestModel->getText();
-        } else {
-            $messages = array();
-            $messages[] = $lineRequestModel->getText();
+        if ($lineRequestModel->getText() !== "完了") {
+            $messages = $memcacheUtil->get("messages");
+            if ($messages) {
+                $messages[] = $lineRequestModel->getText();
+            } else {
+                $messages = array();
+                $messages[] = $lineRequestModel->getText();
+            }
+            $memcacheUtil->set("messages",$messages,60);
         }
-
-        error_log(print_r($messages,true));
-        $memcacheUtil->set("messages",$messages,60);
 
         //コメントを保存する
         if ($searchModel->getReservedMessageKey() == WRITE_COMPLETE_COMMENT) {
             $memcacheUtil->set("comment", false);
+            $messages = $memcacheUtil->get("messages");
+            $key = $memcacheUtil->get("comment_key");
+            $comment = "";
+            foreach ($messages as $message) {
+                $comment .= $message."\n";
+                $comment .= "ーーーーーー\n";
+            }
+            $mongoUtil->insertComment($lineRequestModel->getRoomKey(),$key,$comment);
         }
         return 'OK';
     }

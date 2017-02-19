@@ -225,8 +225,8 @@ EOT;
         $detail = $this->materialDetail[$targetMaterial];
 
         $message = $detail["name"]."のコメント書いてね\n";
-        $message = "ここから１分以内にメッセージを書いて、最後に「完了」って入力すると登録できるよ！\n";
-        $message = "ではでは、スタート！\n";
+        $message .= "ここから１分以内にメッセージを書いて、最後に「完了」って入力すると登録できるよ！\n";
+        $message .= "ではでは、スタート！\n";
 
         $this->messageArray[] = LineMessageUtil::getTextMessage($message);
     }
