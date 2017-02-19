@@ -65,6 +65,7 @@ $app->post('/callback', function (Request $request) use ($app) {
                 $messages[] = $lineRequestModel->getText();
             }
             $memcacheUtil->set("messages",$messages,60);
+            return 'OK';
         }
 
         //コメントを保存する
