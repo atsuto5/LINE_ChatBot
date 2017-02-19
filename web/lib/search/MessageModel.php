@@ -145,9 +145,9 @@ EOT;
             $commentWriteAction->setData($result["name"]);
             $commentWriteAction->setText($result["name"]."のコメントを書く");
 
-            $buttonTemplate->addAction($commentWriteAction);
-            $buttonTemplate->addAction($commentReadAction);
-            $buttonTemplate->addAction($detailAction);
+            $columnTemplate->addAction($commentWriteAction);
+            $columnTemplate->addAction($commentReadAction);
+            $columnTemplate->addAction($detailAction);
 
             $carouselTemplate->addColumn($columnTemplate);
 		}
